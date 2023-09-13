@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('cv')->nullable();
             $table->string('picture')->nullable();
-            $table->string('phone', 10);
+            $table->string('phone', 5);
             $table->text('medical_service');
             $table->timestamps();
 

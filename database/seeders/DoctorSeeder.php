@@ -19,21 +19,25 @@ class DoctorSeeder extends Seeder
 
     public function run(Faker $faker)
     {
-        $user = User::all();
+        $users = User::all();
+        $doctorId = 1; // Inizia con l'ID del dottore desiderato
 
-        for ($i = 1; $i < 11; $i++) {
+        foreach ($users as $user) {
             $doctor = new Doctor();
 
-            // Assegna un ID utente esistente come proprietario del dottore
-            $doctor->user_id = $user->id; // Sostituisci con l'ID dell'utente desiderato
+            // Assegna l'ID utente come proprietario del dottore
+            $doctor->user_id = $user->id;
 
-            $doctor->address = $faker->sentece(5);
+            // Altri dati del dottore
+            $doctor->address = $faker->sentence(5);
             $doctor->cv = $faker->fileExtension('pdf', 'jpg', 'jpeg', 'docs');
             $doctor->picture = $faker->imageUrl(360, 180, 'doctor', true);
-            $doctor->phone = $faker->randomNumber(10, true);
+            $doctor->phone = $faker->randomNumber(5, true);
             $doctor->medical_service = $faker->paragraph(100);
 
             $doctor->save();
+
+            $doctorId++; // Incrementa l'ID del dottore
         }
     }
 }
