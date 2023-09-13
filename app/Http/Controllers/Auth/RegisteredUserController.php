@@ -19,18 +19,19 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(array $data)
+    public function create(/* array $data */)
     {
-        $new_user = User::create([
+        /* $new_user = User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'address' => $data['address'],
             /* 'slug' => $this->generateUserSlugFromName($data['name'], $data['surname']), */
-            'email' => $data['email'],
+        /*  'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
-        return $new_user;
+        return $new_user;  */
+        return view('auth.register');
     }
     /* 
     private function generateUserSlugFromName($name, $surname)
