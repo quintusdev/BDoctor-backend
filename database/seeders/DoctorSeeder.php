@@ -22,10 +22,15 @@ class DoctorSeeder extends Seeder
             $doctor = new Doctor();
 
             $doctor->address = $faker->sentence(2);
-            $doctor->cv = $faker->file('docs', 'PDF', 'JPG', 'JPEG', 'PNG', false);
+            $doctor->cv = $faker->fileExtension('pdf', 'jpg', 'jpeg', 'docs');
             $doctor->picture = $faker->imageUrl(360, 180, 'doctor', true);
-            $doctor->phone_number = $faker->randomNumber('+39', 10);
-            $doctor->medical_service = $doctor->paragraph(200);
+            // Generate a 10-digit phone number as a string
+            $phone = '0'; // Start with a 0 (assuming this is a valid prefix)
+            for ($j = 1; $j < 10; $j++) {
+                $phone .= $faker->randomDigit;
+            }
+            $doctor->phone = $phone;
+            $doctor->medical_service = $faker->paragraph(100);
 
             $doctor->save();
         }
