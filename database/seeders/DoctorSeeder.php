@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 
 use App\Models\Doctor;
+use App\Models\User;
 
 class DoctorSeeder extends Seeder
 {
@@ -18,18 +19,18 @@ class DoctorSeeder extends Seeder
 
     public function run(Faker $faker)
     {
+        $user = User::all();
+
         for ($i = 1; $i < 11; $i++) {
             $doctor = new Doctor();
 
-            $doctor->address = $faker->sentence(2);
+            // Assegna un ID utente esistente come proprietario del dottore
+            $doctor->user_id = $user->id; // Sostituisci con l'ID dell'utente desiderato
+
+            $doctor->address = $faker->sentece(5);
             $doctor->cv = $faker->fileExtension('pdf', 'jpg', 'jpeg', 'docs');
             $doctor->picture = $faker->imageUrl(360, 180, 'doctor', true);
-            // Generate a 10-digit phone number as a string
-            $phone = '0'; // Start with a 0 (assuming this is a valid prefix)
-            for ($j = 1; $j < 10; $j++) {
-                $phone .= $faker->randomDigit;
-            }
-            $doctor->phone = $phone;
+            $doctor->phone = $faker->randomNumber(10, true);
             $doctor->medical_service = $faker->paragraph(100);
 
             $doctor->save();

@@ -15,12 +15,16 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id'); // Aggiungi questa colonna
             $table->string('address');
             $table->string('cv')->nullable();
             $table->string('picture')->nullable();
             $table->string('phone', 10);
             $table->text('medical_service');
             $table->timestamps();
+
+            // Aggiungi la chiave esterna
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
