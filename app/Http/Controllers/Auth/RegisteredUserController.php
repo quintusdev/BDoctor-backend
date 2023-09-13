@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Str;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -24,13 +25,27 @@ class RegisteredUserController extends Controller
             'name' => $data['name'],
             'surname' => $data['surname'],
             'address' => $data['address'],
-            'slug' => $this->generateUserSlugFromName($data['name'], $data['surname']),
+            /* 'slug' => $this->generateUserSlugFromName($data['name'], $data['surname']), */
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
         return $new_user;
     }
+    /* 
+    private function generateUserSlugFromName($name, $surname)
+    {
+        $base_slug = Str::slug($name . '' . $surname, '-');
+        $slug = $base_slug;
+        $count = 1;
+        $user_found = User::where('slug', '=', $slug)->first();
+        while ($user_found) {
+            $slug = $base_slug . '-' . $count;
+            $user_found = User::where('slug', '=', $slug)->first();
+            $count++;
+        }
+        return $slug;
+    } */
 
     /**
      * Handle an incoming registration request.
