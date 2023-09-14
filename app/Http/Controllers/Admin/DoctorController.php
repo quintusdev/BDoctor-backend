@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Models\Doctor;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,12 @@ class DoctorController extends Controller
     {
         $user = Auth::user();
         $doctor = $user->doctor;
-        return view('admin.doctors.index', compact('doctor', 'user'));
+        $doctorDetails = DB::table('users')
+            ->join('doctors', 'users.id', '=', 'doctors.user_id')
+            ->select('doctors.address', 'doctors.phone')
+            ->get();
+
+        return view('admin.doctors.index')->with(['doctor' => $doctor, 'user' => $user, 'doctorDetails' => $doctorDetails]);
     }
 
     /**
@@ -41,7 +47,21 @@ class DoctorController extends Controller
      */
     public function store(StoreDoctorRequest $request)
     {
-        //
+        // Valida i dati del form
+        $validatedData = $request->validate([
+            'address' => 'required|string|max:255', // Assicurati che la regola di validazione sia presente
+            // Altre regole di validazione per gli altri campi del medico
+        ]);
+
+        // Crea una nuova istanza di Doctor
+        $doctor = new Doctor();
+
+        // Assegna i valori dai dati del form all'istanza del medico
+        $doctor->address = $validatedData['address'];
+        // Assegna altri campi del medico in base ai dati del form
+
+        // Salva il medico nel database
+        $doctor->save();
     }
 
     /**
