@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        /* Creazione tabella pivot fra doctors e specializations */
         Schema::create('specialization_doctor', function (Blueprint $table) {
             /* foreign key tabella doctors */
             $table->unsignedBigInteger('doctor_id');
