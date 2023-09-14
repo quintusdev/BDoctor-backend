@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Auth\Str;
+use Illuminate\Support\Str;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -38,12 +38,14 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        /* Genero lo slug con il nome e cognome */
+        $slug = Str::slug($request->name . ' ' . $request->surname, '-');
+
         $user = User::create([
             'name' => $request->name,
             'surname' => $request->surname,
             'email' => $request->email,
-            /* assegno un valore di default allo slug nel caso non ce ne fosse uno */
-            'slug' => 'slug-value',
+            'slug' => $slug,
             'password' => Hash::make($request->password),
         ]);
 

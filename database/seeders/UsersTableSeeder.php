@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
 
             $user->name = $faker->sentence(1);
             $user->surname = $faker->sentence(1);
-            $user->slug = Str::slug($user, '-');
+            $user->slug = 
             $user->email = $faker->unique()->safeEmail;
             $user->password = bcrypt($faker->password);
 
