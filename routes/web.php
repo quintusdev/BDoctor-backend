@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 /* Rotta per dashboard utente registrato */
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    /* Route::get('/', [DashboardController::class, 'index'])->name('dashboard'); */
+    
 });
 
 require __DIR__ . '/auth.php';

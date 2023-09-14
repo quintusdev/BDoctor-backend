@@ -32,7 +32,7 @@ class DoctorSeeder extends Seeder
             $doctor->address = $faker->sentence(5);
             $doctor->cv = $faker->fileExtension('pdf', 'jpg', 'jpeg', 'docs');
             $doctor->picture = $faker->imageUrl(360, 180, 'doctor', true);
-            $doctor->phone = $faker->randomNumber(5, true);
+            $doctor->phone = $faker->e164PhoneNumber();
             $doctor->medical_service = $faker->paragraph(100);
 
             $doctor->save();
