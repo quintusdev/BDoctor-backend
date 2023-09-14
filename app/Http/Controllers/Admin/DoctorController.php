@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
 
@@ -16,8 +18,9 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $doctors = Doctor::all();
-        return view('admin.doctors.index', compact('doctors'));
+        $user = Auth::user();
+        $doctor = $user->doctor;
+        return view('admin.doctors.index', compact('doctor', 'user'));
     }
 
     /**
