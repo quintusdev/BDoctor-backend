@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Doctor extends Model
 {
@@ -15,6 +16,11 @@ class Doctor extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    /* relazione one to many tabella reviews */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
     }
     /* relazione many to many alla tabella specialization */
     public function specializations(): BelongsToMany
