@@ -2,6 +2,13 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DoctorController as DoctorController;
+use App\Http\Controllers\Admin\MessageController as MessageController;
+use App\Http\Controllers\Admin\ReviewController as ReviewController;
+use App\Http\Controllers\Admin\SpecializationController as SpecializationController;
+use App\Http\Controllers\Admin\SponsorController as SponsorController;
+use App\Http\Controllers\Admin\VoteController as VoteController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +37,13 @@ Route::middleware('auth')->group(function () {
 /* Rotta per dashboard utente registrato */
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    
+    Route::resource('doctors', DoctorController::class);
+    Route::resource('messages', MessageController::class);
+    Route::resource('reviews', ReviewController::class);
+    Route::resource('votes', VoteController::class);
+    Route::resource('sponsors', SponsorController::class);
+    Route::resource('specializations', SpecializationController::class);
 });
+
 
 require __DIR__ . '/auth.php';

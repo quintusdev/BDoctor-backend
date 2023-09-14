@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Specialization;
-use App\Http\Requests\StoreSpecializationRequest;
-use App\Http\Requests\UpdateSpecializationRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Vote;
+use App\Http\Requests\StoreVoteRequest;
+use App\Http\Requests\UpdateVoteRequest;
 
-class SpecializationController extends Controller
+class VoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +32,10 @@ class SpecializationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreSpecializationRequest  $request
+     * @param  \App\Http\Requests\StoreVoteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSpecializationRequest $request)
+    public function store(StoreVoteRequest $request)
     {
         //
     }
@@ -42,10 +43,10 @@ class SpecializationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Specialization  $specialization
+     * @param  \App\Models\Vote  $vote
      * @return \Illuminate\Http\Response
      */
-    public function show(Specialization $specialization)
+    public function show(Vote $vote)
     {
         //
     }
@@ -53,10 +54,10 @@ class SpecializationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Specialization  $specialization
+     * @param  \App\Models\Vote  $vote
      * @return \Illuminate\Http\Response
      */
-    public function edit(Specialization $specialization)
+    public function edit(Vote $vote)
     {
         //
     }
@@ -64,11 +65,11 @@ class SpecializationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSpecializationRequest  $request
-     * @param  \App\Models\Specialization  $specialization
+     * @param  \App\Http\Requests\UpdateVoteRequest  $request
+     * @param  \App\Models\Vote  $vote
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSpecializationRequest $request, Specialization $specialization)
+    public function update(UpdateVoteRequest $request, Vote $vote)
     {
         //
     }
@@ -76,10 +77,10 @@ class SpecializationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Specialization  $specialization
+     * @param  \App\Models\Vote  $vote
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Specialization $specialization)
+    public function destroy(Vote $vote)
     {
         //
     }
