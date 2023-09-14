@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use FFI;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,5 +25,10 @@ class Doctor extends Model
     public function sponsors(): BelongsToMany
     {
         return $this->belongsToMany(Sponsor::class);
+    }
+    /* relazione many to many alla tabella votes */
+    public function votes(): BelongsToMany
+    {
+        return $this->belongsToMany(Vote::class);
     }
 }
