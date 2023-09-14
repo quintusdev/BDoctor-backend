@@ -10,6 +10,8 @@ class Sponsor extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'price', 'duration'];
+
     /* relazione many to many alla tabella doctor */
     public function doctors(): BelongsToMany
     {

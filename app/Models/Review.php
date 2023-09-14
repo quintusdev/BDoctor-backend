@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'surname', 'text', 'email'];
+
     /* relazione tabella doctor */
     public function doctor(): BelongsTo
     {

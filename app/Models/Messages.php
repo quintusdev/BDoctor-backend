@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Messages extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['user_id', 'text', 'email', 'name', 'surname'];
+
     /* relazione tabella user */
     public function User(): BelongsTo
     {

@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Specialization extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'description'];
+
     /* relazione many to many con tabella doctor */
     public function doctor()
     {

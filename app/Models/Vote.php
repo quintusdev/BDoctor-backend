@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Vote extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['value'];
+
     /* relazione many to many alla tabella doctor */
     public function doctors(): BelongsToMany
     {
