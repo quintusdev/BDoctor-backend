@@ -6,8 +6,13 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <img src="{{ asset('storage/' . $doctor->picture) }}" class="rounded float-start"
-                            alt="Immagine Profilo">
+                        @if (!empty($doctor->picture))
+                            <img src="{{ asset('storage/public/images' . $doctor->picture) }}" alt="Immagine Profilo"
+                                class="image_show card product_card" style="width: 300px">
+                        @else
+                            <img src="{{ asset('storage/public/images' . $doctor->immagine_predefinita) }}"
+                                alt="Immagine Predefinita">
+                        @endif
                     </div>
 
                     <div>
@@ -28,25 +33,12 @@
                 </div>
 
                 <div>
-                    <h4>Immagine profilo: {{ $doctor->picture }}</h4>
-                </div>
-
-                <div>
                     <h4>N. telefono: {{ $doctor->phone }}</h4>
                 </div>
 
                 <div>
                     <h4>Prestazioni: {{ $doctor->medical_service }}</h4>
                 </div>
-
-                {{-- <div>
-                    <img src="{{ asset('storage/' . $doctor->image) }}" width="500px">
-                </div> --}}
-
-                {{-- <div>
-                    {{ $project->type->name }}
-                </div> --}}
-
                 {{-- <div>
                     <strong>Tecnologie:</strong>
                     @if ($project->technologies)

@@ -70,12 +70,16 @@ class DoctorController extends Controller
 
         if ($request->hasFile('picture')) {
 
-            $img_path = Storage::put('doctors', $request->picture);
+            $img_path = Doctor::find($doctor->id);
+            $img_path->immagine_predefinita = 'images/icon_img-png';
 
             $form_data['picture'] = $img_path;
         }
+        $img_path->save();
         // Salva il medico nel database
         $doctor->save();
+
+        return view('admin.doctors.show', compact('doctor', 'doctors', 'user', 'user_id'));
     }
 
     /**
@@ -130,17 +134,34 @@ class DoctorController extends Controller
      */
     public function update(UpdateDoctorRequest $request, Doctor $doctor)
     {
+        $user_id = Auth::id();
+        $userDetail = User::findOrFail($user_id);
+
+        // Otteniamo il dottore associato all'utente corrente
+        $doctor = $userDetail->doctor;
+
         if ($request->hasFile('picture')) {
-
+            // Elimina l'immagine esistente se presente
             if ($doctor->picture) {
-
                 Storage::delete($doctor->picture);
             }
 
-            $img = Storage::put('doctors', $request->picture);
+            // Salva la nuova immagine nello storage e ottieni il percorso
+            $imgPath = $request->file('picture')->store('doctors', 'public');
 
-            $form_data['picture'] = $img;
+            // Aggiorna il campo 'picture' nel modello Doctor con il nuovo percorso
+            $doctor->picture = $imgPath;
+
+            // Salva il modello Doctor per aggiornare il percorso dell'immagine
+            $doctor->save();
         }
+
+        // Altri aggiornamenti del modello Doctor se necessario
+        $doctor->update([
+            // Altri campi da aggiornare
+        ]);
+
+        return redirect()->route('admin.doctors.show', ['doctor' => $doctor]);
     }
 
     /**

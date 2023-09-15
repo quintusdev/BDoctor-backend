@@ -96,6 +96,11 @@
                         {{-- @error('technologies')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
+
+                        <div class="form-group mt-4">
+                            <button class="btn btn-sm btn-success" type="submit">Salva</button>
+                        </div>
+                    </form>
                 </div>
 
                 {{--  <div class="form-group mt-4">
@@ -103,11 +108,6 @@
                             <textarea class="form-control" name="content" id="content" placeholder="Contenuto">{{ old('content') ?? $project->content }}</textarea>
                         </div> --}}
 
-                <div class="form-group mt-4">
-                    <button class="btn btn-sm btn-success" type="submit">Salva</button>
-                </div>
-
-                </form>
             </div>
         </div>
     </div>
