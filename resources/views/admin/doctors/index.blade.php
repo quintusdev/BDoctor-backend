@@ -31,13 +31,6 @@
                                         class="fas fa-eye"></i></a>
                                 <a class="btn btn-warning btn-sm" href="{{ route('admin.doctors.edit', $doctor->id) }}"><i
                                         class="fas fa-pen"></i></a>
-                                <form class="d-inline-block delete-doctor-form"
-                                    action="{{ route('admin.doctors.destroy', $doctor->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                            class="fas fa-trash"></i></button>
-                                </form>
                             </td>
                         </tr>
                     </tbody>
