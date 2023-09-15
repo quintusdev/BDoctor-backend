@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('cv')->nullable();
             $table->string('picture')->nullable();
             $table->string('phone', 13);
-            $table->text('medical_service');
+            $table->text('medical_service')->nullable();
             $table->timestamps();
 
             // Aggiungi la chiave esterna

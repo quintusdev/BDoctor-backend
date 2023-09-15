@@ -19,14 +19,20 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $doctor = $user->doctor;
-        $doctorDetails = DB::table('users')
-            ->join('doctors', 'users.id', '=', 'doctors.user_id')
-            ->select('doctors.address', 'doctors.phone')
-            ->get();
+        // Ottieni l'ID dell'utente attualmente autenticato
+        $user_id = Auth::id();
 
-        return view('admin.doctors.index')->with(['doctor' => $doctor, 'user' => $user, 'doctorDetails' => $doctorDetails]);
+        // Ottieni l'oggetto dell'utente attualmente autenticato
+        $user = Auth::user();
+
+        // Cerca il dottore associato all'utente corrente utilizzando l'ID utente
+        $doctors = Doctor::where('user_id', $user_id)->first();
+
+        // Ottieni il dottore associato all'utente utilizzando la relazione definita nel modello User
+        $doctor = $user->doctor;
+
+        // Restituisci la vista 'admin.doctors.index' passando i dati alla vista
+        return view('admin.doctors.index', compact('doctors', 'doctor', 'user_id', 'user'));
     }
 
     /**
