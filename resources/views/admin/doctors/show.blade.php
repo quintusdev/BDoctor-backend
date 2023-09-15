@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="d-flex justify-content-between">
-                    <div>
+                <div>
+                    <!-- <div>
                         @if (!empty($doctor->picture))
                             <img src="{{ asset('storage/public/images' . $doctor->picture) }}" alt="Immagine Profilo"
                                 class="image_show card product_card" style="width: 300px">
@@ -13,10 +13,14 @@
                             <img src="{{ asset('storage/public/images' . $doctor->immagine_predefinita) }}"
                                 alt="Immagine Predefinita">
                         @endif
-                    </div>
+                    </div> -->
 
                     <div>
                         <h1>{{ $user->name }} {{ $user->surname }}</h1>
+                    </div>
+                    
+                    <div>
+                        <img src="{{ asset('storage/'.$doctor->picture) }}" width="500px">
                     </div>
 
                     <div>
