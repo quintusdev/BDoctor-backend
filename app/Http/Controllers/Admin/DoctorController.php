@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Doctor;
 use App\Models\User;
+use App\Models\Specialization;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
@@ -78,7 +79,17 @@ class DoctorController extends Controller
      */
     public function show(Doctor $doctor)
     {
-        //
+        // Ottieni l'ID dell'utente attualmente autenticato
+        $user_id = Auth::id();
+        // Ottieni l'oggetto dell'utente attualmente autenticato
+        $user = Auth::user();
+        // Cerca il dottore associato all'utente corrente utilizzando l'ID utente
+        $doctors = Doctor::where('user_id', $user_id)->first();
+
+        // Ottieni il dottore associato all'utente utilizzando la relazione definita nel modello User
+        $doctor = $user->doctor;
+
+        return view('admin.doctors.show', compact('doctor', 'doctors', 'user', 'user_id'));
     }
 
     /**
@@ -89,7 +100,18 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
-        //
+        $specializations = Specialization::all();
+        // Ottieni l'ID dell'utente attualmente autenticato
+        $user_id = Auth::id();
+        // Ottieni l'oggetto dell'utente attualmente autenticato
+        $user = Auth::user();
+        // Cerca il dottore associato all'utente corrente utilizzando l'ID utente
+        $doctors = Doctor::where('user_id', $user_id)->first();
+
+        // Ottieni il dottore associato all'utente utilizzando la relazione definita nel modello User
+        $doctor = $user->doctor;
+
+        return view('admin.doctors.edit', compact('specializations', 'doctor', 'doctors', 'user', 'user_id'));
     }
 
     /**

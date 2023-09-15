@@ -17,6 +17,7 @@
                             <th scope="col">Cognome</th>
                             <th scope="col">Indirizzo</th>
                             <th scope="col">N. Telefono</th>
+                            <th scope="col">Strumenti</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,7 +26,7 @@
                             <td>{{ $user->surname }}</td>
                             <td>{{ $doctor->address }}</td>
                             <td>{{ $doctor->phone }}</td>
-                            {{-- <td>
+                            <td>
                                 <a class="btn btn-info btn-sm" href="{{ route('admin.doctors.show', $doctor->id) }}"><i
                                         class="fas fa-eye"></i></a>
                                 <a class="btn btn-warning btn-sm" href="{{ route('admin.doctors.edit', $doctor->id) }}"><i
@@ -37,12 +38,10 @@
                                     <button type="submit" class="btn btn-danger btn-sm"><i
                                             class="fas fa-trash"></i></button>
                                 </form>
-                            </td> --}}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-
-                <a href="{{ route('admin.doctors.create') }}" class="btn btn-sm btn-primary">Aggiungi un nuovo progetto</a>
             </div>
         </div>
     </div>

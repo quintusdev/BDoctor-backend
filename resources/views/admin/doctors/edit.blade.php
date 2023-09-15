@@ -1,0 +1,105 @@
+@extends('layouts.admin')
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h1>Modifica il tuo profilo</h1>
+                    </div>
+
+                    <div>
+                        <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Dashboard</a>
+                    </div>
+                </div>
+
+                <div>
+                    <form action="{{ route('admin.doctors.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="form-group mt-4">
+                            <label class="contol-lable">Nome</label>
+                            <input class="form-control @error('name')is-invalid @enderror" type="text" name="name"
+                                id="name" placeholder="Nome" value="{{ old('name') ?? $user->name }}">
+                            {{-- @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror --}}
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <div>
+                                <img src="{{ asset('storage/' . $doctor->picture) }}" width="500px">
+                            </div>
+                            <label class="contol-lable">Immagine Profilo</label>
+                            <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture"
+                                id="picture">
+                            {{-- @error('picture')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror --}}
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label class="contol-lable">Specializzazione</label>
+                            <select class="form-control @error('specilizations') is-invalid @enderror" name="specilizations"
+                                id="specilizations">
+                                <option value="">Seleziona una specializzazione</option>
+                                @foreach ($specializations as $specialization)
+                                    <option
+                                        {{ $specialization->id === old('specilization', $specialization->name) ? 'selected' : '' }}
+                                        value="{{ $specialization->id }}">{{ $specialization->name }}</option>
+                                @endforeach
+                            </select>
+                            <div>
+                                <label class="contol-lable">Descrizione Specializzazione</label>
+                                <input class="form-control @error('description')is-invalid @enderror" type="text"
+                                    description="description" id="description" placeholder="Descrizione"
+                                    value="{{ old('description') ?? $specializations->description }}">
+                                {{-- @error('description')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror --}}
+                            </div>
+                            {{-- @error('cv')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror --}}
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <div>Seleziona la tecnologia</div>
+                            @foreach ($technologies as $technology)
+                                <div class="form-check @error('technology') is-invalid @enderror">
+                                    @if ($errors->any())
+                                        <input type="checkbox" name="technologies[]" value="{{ $technology->id }}"
+                                            class="form-check-input"
+                                            {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
+                                    @else
+                                        <input type="checkbox" name="technologies[]" value="{{ $technology->id }}"
+                                            class="form-check-input"
+                                            {{ $project->technologies->contains($technology) ? 'checked' : '' }}>
+                                    @endif
+                                    <label class="form-check-label">
+                                        {{ $technology->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                            {{-- @error('technologies')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror --}}
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label class="contol-lable">Contenuto</label>
+                            <textarea class="form-control" name="content" id="content" placeholder="Contenuto">{{ old('content') ?? $project->content }}</textarea>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <button class="btn btn-sm btn-success" type="submit">Salva</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
