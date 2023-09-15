@@ -6,11 +6,11 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 
-use App\Models\Messages;
+use App\Models\Message;
 use App\Models\User;
 
 
-class MessagesSeeder extends Seeder
+class MessageSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -23,7 +23,7 @@ class MessagesSeeder extends Seeder
         $messageId = 1; // Inizia con l'ID del dottore desiderato
 
         foreach ($users as $user) {
-            $message = new Messages();
+            $message = new Message();
 
             // Assegna l'ID utente come proprietario del dottore
             $message->user_id = $user->id;
