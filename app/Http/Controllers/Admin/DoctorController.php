@@ -157,11 +157,11 @@ class DoctorController extends Controller
             // Salva il modello Doctor per aggiornare il percorso dell'immagine
             $doctor->save();
         }
-        
+
         // Altri aggiornamenti del modello Doctor se necessario
         $doctor->update($form_data);
-        
-        if($request->has('specializations')){
+
+        if ($request->has('specializations')) {
             $doctor->specializations()->sync($request->specializations);
         }
 

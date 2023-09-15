@@ -5,17 +5,17 @@
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between">
-                    <div>
+                    <div class="col-6 mt-4 mx-2">
                         <h1>Modifica il tuo profilo</h1>
                     </div>
-
-                    <div>
-                        <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Dashboard</a>
+                    <div class="col-6 mt-5 mx-2">
+                        <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Torna alla Dashboard</a>
                     </div>
                 </div>
 
                 <div>
-                    <form action="{{ route('admin.doctors.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.doctors.update', $user->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -37,10 +37,11 @@
                             @enderror --}}
                         </div>
 
-                        <div class="form-group col-3 mt-4">
+                        <div class="form-group col-6 mt-4">
                             <div>
-                                <h5><strong>Inserisci la tua immagine profilo:</strong></h5>
+                                <h5><strong>Inserisci o aggiorna la tua immagine profilo:</strong></h5>
                                 <img src="{{ asset('storage/' . $doctor->picture) }}" width="500px">
+                                <caption>Immagine Profilo</caption>
                             </div>
                             <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture"
                                 id="picture">
@@ -55,23 +56,25 @@
                                 @foreach ($specializations as $specialization)
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch"
-                                            id="flexSwitchCheckDefault" name="specializations[]" value="{{ $specialization->id }}" {{ in_array($specialization->id, old('specializations', $doctor->specializations->pluck('id')->toArray())) ? 'checked' : '' }}
-                                        <label class="form-check-label me-2"
+                                            id="flexSwitchCheckDefault" name="specializations[]"
+                                            value="{{ $specialization->id }}"
+                                            {{ in_array($specialization->id, old('specializations', $doctor->specializations->pluck('id')->toArray())) ? 'checked' : '' }}
+                                            <label class="form-check-label me-2"
                                             for="flexSwitchCheckDefault">{{ $specialization->name }}</label>
                                     </div>
                                 @endforeach
                             </div>
 
                             <div class="form-group col-3 mt-4">
-                            <div>
-                                <h5><strong>Inserisci il tuo curriculum:</strong></h5>
-                            </div>
-                            <input type="file" class="form-control @error('cv') is-invalid @enderror" name="cv"
-                                id="cv">
-                            {{-- @error('picture')
+                                <div>
+                                    <h5><strong>Inserisci il tuo curriculum:</strong></h5>
+                                </div>
+                                <input type="file" class="form-control @error('cv') is-invalid @enderror" name="cv"
+                                    id="cv">
+                                {{-- @error('picture')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
-                        </div>
+                            </div>
 
 
                             {{-- <label class="contol-lable">Descrizione Specializzazione</label>
