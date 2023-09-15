@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Doctor;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -34,6 +35,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:200'],
+            'phone' => ['required', 'string', 'max:13'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -48,6 +51,14 @@ class RegisteredUserController extends Controller
             'slug' => $slug,
             'password' => Hash::make($request->password),
         ]);
+
+        $doctor = new Doctor([
+            'user_id' => $user->id,
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+        ]);
+
+        $doctor->save();
 
         event(new Registered($user));
 
