@@ -19,8 +19,8 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="form-group mt-4">
-                            <label class="contol-lable">Nome</label>
+                        <div class="form-group col-3 mt-4">
+                            <h5><strong>Nome:</strong></h5>
                             <input class="form-control @error('name')is-invalid @enderror" type="text" name="name"
                                 id="name" placeholder="Nome" value="{{ old('name') ?? $user->name }}">
                             {{-- @error('name')
@@ -28,11 +28,20 @@
                             @enderror --}}
                         </div>
 
-                        <div class="form-group mt-4">
+                        <div class="form-group col-3 mt-4">
+                            <h5><strong>Cognome:</strong></h5>
+                            <input class="form-control @error('surname')is-invalid @enderror" type="text" name="surname"
+                                id="surname" placeholder="Cognome" value="{{ old('surname') ?? $user->surname }}">
+                            {{-- @error('surname')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror --}}
+                        </div>
+
+                        <div class="form-group col-3 mt-4">
                             <div>
+                                <h5><strong>Inserisci la tua immagine profilo:</strong></h5>
                                 <img src="{{ asset('storage/' . $doctor->picture) }}" width="500px">
                             </div>
-                            <label class="contol-lable">Immagine Profilo</label>
                             <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture"
                                 id="picture">
                             {{-- @error('picture')
@@ -41,31 +50,32 @@
                         </div>
 
                         <div class="form-group mt-4">
-                            <label class="contol-lable">Specializzazione</label>
-                            <select class="form-control @error('specilizations') is-invalid @enderror" name="specilizations"
-                                id="specilizations">
-                                <option value="">Seleziona una specializzazione</option>
-                                @foreach ($specializations as $specialization)
-                                    <option
-                                        {{ $specialization->id === old('specilization', $specialization->name) ? 'selected' : '' }}
-                                        value="{{ $specialization->id }}">{{ $specialization->name }}</option>
+                            <div class="mt-2">
+                                <h4><strong>Seleziona le tue Specializzazioni:</strong></h4>
+                                @foreach ($specializations as $item)
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch"
+                                            id="flexSwitchCheckDefault">
+                                        <label class="form-check-label me-2"
+                                            for="flexSwitchCheckDefault">{{ $item->name }}</label>
+                                    </div>
                                 @endforeach
-                            </select>
-                            <div>
-                                <label class="contol-lable">Descrizione Specializzazione</label>
+                            </div>
+
+
+                            {{-- <label class="contol-lable">Descrizione Specializzazione</label>
                                 <input class="form-control @error('description')is-invalid @enderror" type="text"
                                     description="description" id="description" placeholder="Descrizione"
-                                    value="{{ old('description') ?? $specializations->description }}">
-                                {{-- @error('description')
+                                    value="{{ old('description') ?? $specializations->description }}"> --}}
+                            {{-- @error('description')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror --}}
-                            </div>
                             {{-- @error('cv')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
                         </div>
 
-                        <div class="form-group mt-4">
+                        {{--  <div class="form-group mt-4">
                             <div>Seleziona la tecnologia</div>
                             @foreach ($technologies as $technology)
                                 <div class="form-check @error('technology') is-invalid @enderror">
@@ -82,24 +92,24 @@
                                         {{ $technology->name }}
                                     </label>
                                 </div>
-                            @endforeach
-                            {{-- @error('technologies')
+                            @endforeach --}}
+                        {{-- @error('technologies')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
-                        </div>
+                </div>
 
-                        <div class="form-group mt-4">
+                {{--  <div class="form-group mt-4">
                             <label class="contol-lable">Contenuto</label>
                             <textarea class="form-control" name="content" id="content" placeholder="Contenuto">{{ old('content') ?? $project->content }}</textarea>
-                        </div>
+                        </div> --}}
 
-                        <div class="form-group mt-4">
-                            <button class="btn btn-sm btn-success" type="submit">Salva</button>
-                        </div>
-
-                    </form>
+                <div class="form-group mt-4">
+                    <button class="btn btn-sm btn-success" type="submit">Salva</button>
                 </div>
+
+                </form>
             </div>
         </div>
+    </div>
     </div>
 @endsection

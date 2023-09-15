@@ -6,6 +6,11 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <div>
+                        <img src="{{ asset('storage/' . $doctor->picture) }}" class="rounded float-start"
+                            alt="Immagine Profilo">
+                    </div>
+
+                    <div>
                         <h1>{{ $user->name }} {{ $user->surname }}</h1>
                     </div>
 

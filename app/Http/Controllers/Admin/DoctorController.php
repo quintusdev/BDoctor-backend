@@ -8,6 +8,7 @@ use App\Models\Doctor;
 use App\Models\User;
 use App\Models\Specialization;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
 
@@ -67,6 +68,12 @@ class DoctorController extends Controller
         $doctor->address = $validatedData['address'];
         // Assegna altri campi del medico in base ai dati del form
 
+        if ($request->hasFile('picture')) {
+
+            $img_path = Storage::put('doctors', $request->picture);
+
+            $form_data['picture'] = $img_path;
+        }
         // Salva il medico nel database
         $doctor->save();
     }
@@ -123,7 +130,17 @@ class DoctorController extends Controller
      */
     public function update(UpdateDoctorRequest $request, Doctor $doctor)
     {
-        //
+        if ($request->hasFile('picture')) {
+
+            if ($doctor->picture) {
+
+                Storage::delete($doctor->picture);
+            }
+
+            $img = Storage::put('doctors', $request->picture);
+
+            $form_data['picture'] = $img;
+        }
     }
 
     /**
