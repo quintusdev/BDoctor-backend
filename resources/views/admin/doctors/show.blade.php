@@ -5,6 +5,16 @@
         <div class="row">
             <div class="col-12">
                 <div>
+                    {{-- <div>
+                        @if (!empty($doctor->picture))
+                            <img src="{{ asset('storage/public/images' . $doctor->picture) }}" alt="Immagine Profilo"
+                                class="image_show card product_card" style="width: 300px">
+                        @else
+                            <img src="{{ asset('storage/public/images' . $doctor->immagine_predefinita) }}"
+                                alt="Immagine Predefinita">
+                        @endif
+                    </div> --}}
+
                     <div>
                         <h1>{{ $user->name }} {{ $user->surname }}</h1>
                     </div>
