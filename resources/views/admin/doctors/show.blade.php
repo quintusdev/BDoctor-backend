@@ -34,6 +34,8 @@
 
                 <div>
                     <h4>CV: {{ $doctor->cv }}</h4>
+                    <iframe src="{{ asset('folder/file_name.pdf') }}" width="50%" height="600">
+                    </iframe>
                 </div>
 
                 <div>
