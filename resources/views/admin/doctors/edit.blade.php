@@ -62,6 +62,17 @@
                                 @endforeach
                             </div>
 
+                            <div class="form-group col-3 mt-4">
+                            <div>
+                                <h5><strong>Inserisci il tuo curriculum:</strong></h5>
+                            </div>
+                            <input type="file" class="form-control @error('cv') is-invalid @enderror" name="cv"
+                                id="cv">
+                            {{-- @error('picture')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror --}}
+                        </div>
+
 
                             {{-- <label class="contol-lable">Descrizione Specializzazione</label>
                                 <input class="form-control @error('description')is-invalid @enderror" type="text"
@@ -75,24 +86,6 @@
                             @enderror --}}
                         </div>
 
-                        {{--  <div class="form-group mt-4">
-                            <div>Seleziona la tecnologia</div>
-                            @foreach ($technologies as $technology)
-                                <div class="form-check @error('technology') is-invalid @enderror">
-                                    @if ($errors->any())
-                                        <input type="checkbox" name="technologies[]" value="{{ $technology->id }}"
-                                            class="form-check-input"
-                                            {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
-                                    @else
-                                        <input type="checkbox" name="technologies[]" value="{{ $technology->id }}"
-                                            class="form-check-input"
-                                            {{ $project->technologies->contains($technology) ? 'checked' : '' }}>
-                                    @endif
-                                    <label class="form-check-label">
-                                        {{ $technology->name }}
-                                    </label>
-                                </div>
-                            @endforeach --}}
                         {{-- @error('technologies')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}

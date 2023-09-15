@@ -55,31 +55,31 @@ class DoctorController extends Controller
      */
     public function store(StoreDoctorRequest $request)
     {
-        // Valida i dati del form
-        $validatedData = $request->validate([
-            'address' => 'required|string|max:255', // Assicurati che la regola di validazione sia presente
-            // Altre regole di validazione per gli altri campi del medico
-        ]);
+        // // Valida i dati del form
+        // $validatedData = $request->validate([
+        //     'address' => 'required|string|max:255', // Assicurati che la regola di validazione sia presente
+        //     // Altre regole di validazione per gli altri campi del medico
+        // ]);
 
-        // Crea una nuova istanza di Doctor
-        $doctor = new Doctor();
+        // // Crea una nuova istanza di Doctor
+        // $doctor = new Doctor();
 
-        // Assegna i valori dai dati del form all'istanza del medico
-        $doctor->address = $validatedData['address'];
-        // Assegna altri campi del medico in base ai dati del form
+        // // Assegna i valori dai dati del form all'istanza del medico
+        // $doctor->address = $validatedData['address'];
+        // // Assegna altri campi del medico in base ai dati del form
 
-        if ($request->hasFile('picture')) {
+        // if ($request->hasFile('picture')) {
 
-            $img_path = Doctor::find($doctor->id);
-            $img_path->immagine_predefinita = 'images/icon_img-png';
+        //     $img_path = Doctor::find($doctor->id);
+        //     $img_path->immagine_predefinita = 'images/icon_img-png';
 
-            $form_data['picture'] = $img_path;
-        }
-        $img_path->save();
-        // Salva il medico nel database
-        $doctor->save();
+        //     $form_data['picture'] = $img_path;
+        // }
+        // $img_path->save();
+        // // Salva il medico nel database
+        // $doctor->save();
 
-        return view('admin.doctors.show', compact('doctor', 'doctors', 'user', 'user_id'));
+        // return view('admin.doctors.show', compact('doctor', 'doctors', 'user', 'user_id'));
     }
 
     /**
