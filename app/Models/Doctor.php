@@ -28,7 +28,7 @@ class Doctor extends Model
     /* relazione many to many alla tabella specialization */
     public function specializations(): BelongsToMany
     {
-        return $this->belongsToMany(Specialization::class);
+        return $this->belongsToMany(Specialization::class, 'specialization_doctor', 'doctor_id', 'specialization_id');
     }
     /* relazione many to many alla tabella sponsors */
     public function sponsors(): BelongsToMany

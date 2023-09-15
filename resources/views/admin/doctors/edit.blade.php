@@ -52,12 +52,12 @@
                         <div class="form-group mt-4">
                             <div class="mt-2">
                                 <h4><strong>Seleziona le tue Specializzazioni:</strong></h4>
-                                @foreach ($specializations as $item)
+                                @foreach ($specializations as $specialization)
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch"
-                                            id="flexSwitchCheckDefault">
+                                            id="flexSwitchCheckDefault" name="specializations[]" value="{{ $specialization->id }}">
                                         <label class="form-check-label me-2"
-                                            for="flexSwitchCheckDefault">{{ $item->name }}</label>
+                                            for="flexSwitchCheckDefault">{{ $specialization->name }}</label>
                                     </div>
                                 @endforeach
                             </div>

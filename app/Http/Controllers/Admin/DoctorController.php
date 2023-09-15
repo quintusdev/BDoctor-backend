@@ -136,6 +136,8 @@ class DoctorController extends Controller
     {
         $user_id = Auth::id();
         $userDetail = User::findOrFail($user_id);
+        $specializations = Specialization::all();
+        $form_data = $request->all();
 
         // Otteniamo il dottore associato all'utente corrente
         $doctor = $userDetail->doctor;
@@ -155,11 +157,13 @@ class DoctorController extends Controller
             // Salva il modello Doctor per aggiornare il percorso dell'immagine
             $doctor->save();
         }
-
+        
         // Altri aggiornamenti del modello Doctor se necessario
-        $doctor->update([
-            // Altri campi da aggiornare
-        ]);
+        $doctor->update($form_data);
+        
+        if($request->has('specializations')){
+            $doctor->specializations()->sync($request->specializations);
+        }
 
         return redirect()->route('admin.doctors.show', ['doctor' => $doctor]);
     }
