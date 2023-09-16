@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 my-5">
-                <h1>Gestione del Profilo</h1>
+                <h1>Il tuo Profilo</h1>
                 {{-- @if (session('message'))
                     <div class="alert alert-success">
                         {{ session('message') }}
@@ -27,7 +27,7 @@
                             <td>{{ $doctor->address }}</td>
                             <td>{{ $doctor->phone }}</td>
                             <td>
-                                <a class="btn btn-info btn-sm" title="Visualizza profilo"
+                                <a class="btn btn-info btn-sm me-2" title="Visualizza profilo"
                                     href="{{ route('admin.doctors.show', $doctor->id) }}"><i class="fas fa-eye"></i></a>
                                 <a class="btn btn-warning btn-sm" title="Modifica profilo"
                                     href="{{ route('admin.doctors.edit', $doctor->id) }}"><i class="fas fa-pen"></i></a>
