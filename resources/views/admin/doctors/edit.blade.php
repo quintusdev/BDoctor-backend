@@ -12,13 +12,14 @@
                         <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Torna alla Dashboard</a>
                     </div>
                 </div>
-
+                {{-- FORM DI EDIT DEL PROFILO --}}
                 <div>
                     <form action="{{ route('admin.doctors.update', $user->id) }}" method="POST"
                         enctype="multipart/form-data">
+                        {{-- TOKEN --}}
                         @csrf
                         @method('PUT')
-
+                        {{-- MODIFICA CAMPO NOME --}}
                         <div class="form-group col-3 mt-4">
                             <h5><strong>Nome:</strong></h5>
                             <input class="form-control @error('name')is-invalid @enderror" type="text" name="name"
@@ -27,7 +28,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
                         </div>
-
+                        {{-- MODIFICA CAMPO COGNOME --}}
                         <div class="form-group col-3 mt-4">
                             <h5><strong>Cognome:</strong></h5>
                             <input class="form-control @error('surname')is-invalid @enderror" type="text" name="surname"
@@ -36,7 +37,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
                         </div>
-
+                        {{-- MODIFICA IMMAGINE DI PROFILO --}}
                         <div class="form-group col-6 mt-4">
                             <div>
                                 <h5><strong>Inserisci o aggiorna la tua immagine profilo:</strong></h5>
@@ -49,7 +50,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
                         </div>
-
+                        {{-- MODIFICA SPECIALIZZAZIONI --}}
                         <div class="form-group mt-4">
                             <div class="mt-2">
                                 <h4><strong>Seleziona le tue Specializzazioni:</strong></h4>
@@ -59,12 +60,12 @@
                                             id="flexSwitchCheckDefault" name="specializations[]"
                                             value="{{ $specialization->id }}"
                                             {{ in_array($specialization->id, old('specializations', $doctor->specializations->pluck('id')->toArray())) ? 'checked' : '' }}
-                                            <label class="form-check-label me-2"
-                                            for="flexSwitchCheckDefault">{{ $specialization->name }}</label>
+                                            <label class="form-check-label me-2" for="flexSwitchCheckDefault">
+                                        {{ $specialization->name }}</label>
                                     </div>
                                 @endforeach
                             </div>
-
+                            {{-- CARICAMENTO FILE CV --}}
                             <div class="form-group col-3 mt-4">
                                 <div>
                                     <h5><strong>Inserisci il tuo curriculum:</strong></h5>
@@ -92,7 +93,7 @@
                         {{-- @error('technologies')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
-
+                        {{-- PULSANTE DI SALVATAGGIO DELLE MODIFICHE --}}
                         <div class="form-group mt-4">
                             <button class="btn btn-sm btn-success" type="submit">Salva</button>
                         </div>
