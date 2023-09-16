@@ -55,31 +55,7 @@ class DoctorController extends Controller
      */
     public function store(StoreDoctorRequest $request)
     {
-        // // Valida i dati del form
-        // $validatedData = $request->validate([
-        //     'address' => 'required|string|max:255', // Assicurati che la regola di validazione sia presente
-        //     // Altre regole di validazione per gli altri campi del medico
-        // ]);
-
-        // // Crea una nuova istanza di Doctor
-        // $doctor = new Doctor();
-
-        // // Assegna i valori dai dati del form all'istanza del medico
-        // $doctor->address = $validatedData['address'];
-        // // Assegna altri campi del medico in base ai dati del form
-
-        // if ($request->hasFile('picture')) {
-
-        //     $img_path = Doctor::find($doctor->id);
-        //     $img_path->immagine_predefinita = 'images/icon_img-png';
-
-        //     $form_data['picture'] = $img_path;
-        // }
-        // $img_path->save();
-        // // Salva il medico nel database
-        // $doctor->save();
-
-        // return view('admin.doctors.show', compact('doctor', 'doctors', 'user', 'user_id'));
+        //
     }
 
     /**
@@ -142,20 +118,18 @@ class DoctorController extends Controller
         // Otteniamo il dottore associato all'utente corrente
         $doctor = $userDetail->doctor;
 
+        // Verifica se è stata inviata una nuova immagine tramite il modulo
         if ($request->hasFile('picture')) {
-            // Elimina l'immagine esistente se presente
+            // Se il dottore ha già una foto associata, elimina la vecchia foto dallo storage
             if ($doctor->picture) {
                 Storage::delete($doctor->picture);
             }
 
             // Salva la nuova immagine nello storage e ottieni il percorso
-            $imgPath = $request->file('picture')->store('doctors', 'public');
+            $path = Storage::put('doctor_picture', $request->picture);
 
-            // Aggiorna il campo 'picture' nel modello Doctor con il nuovo percorso
-            $doctor->picture = $imgPath;
-
-            // Salva il modello Doctor per aggiornare il percorso dell'immagine
-            $doctor->save();
+            // Aggiorna il campo 'picture' nei dati del modulo con il nuovo percorso dell'immagine
+            $form_data['picture'] = $path;
         }
 
         // Altri aggiornamenti del modello Doctor se necessario
