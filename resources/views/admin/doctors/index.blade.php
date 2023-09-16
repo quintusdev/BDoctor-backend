@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 my-5">
-                <h1>Portale dei Professionisti</h1>
+                <h1>Gestione del Profilo</h1>
                 {{-- @if (session('message'))
                     <div class="alert alert-success">
                         {{ session('message') }}
@@ -27,14 +27,17 @@
                             <td>{{ $doctor->address }}</td>
                             <td>{{ $doctor->phone }}</td>
                             <td>
-                                <a class="btn btn-info btn-sm" href="{{ route('admin.doctors.show', $doctor->id) }}"><i
-                                        class="fas fa-eye"></i></a>
-                                <a class="btn btn-warning btn-sm" href="{{ route('admin.doctors.edit', $doctor->id) }}"><i
-                                        class="fas fa-pen"></i></a>
+                                <a class="btn btn-info btn-sm" title="Visualizza profilo"
+                                    href="{{ route('admin.doctors.show', $doctor->id) }}"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-warning btn-sm" title="Modifica profilo"
+                                    href="{{ route('admin.doctors.edit', $doctor->id) }}"><i class="fas fa-pen"></i></a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <a class="btn btn-success btn-md mt-4" href="{{-- {{ route('admin.sponsor.show', $doctor->id) }} --}}">
+                    <i class="fa-solid fa-receipt fa-lg"></i>
+                    Metti in evidenza il tuo profilo!</a>
             </div>
         </div>
     </div>

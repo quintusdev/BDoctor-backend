@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div>
+                <div class="col-12 mt-4 d-flex justify-content-between">
                     {{-- <div>
                         @if (!empty($doctor->picture))
                             <img src="{{ asset('storage/public/images' . $doctor->picture) }}" alt="Immagine Profilo"
@@ -14,18 +14,19 @@
                                 alt="Immagine Predefinita">
                         @endif
                     </div> --}}
+                    {{-- NOME UTENTE --}}
+                    <div class="d-flex col-10 align-items-center mt-1">
+                        <h1>Benvenuto {{ $user->name }} {{ $user->surname }}</h1>
+                    </div>
+                    {{-- BUTTON CHE RIPORTA ALLA DASHBOARD --}}
+                    <div class="d-flex col-2 align-items-center mt-1">
+                        <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Torna alla Dashboard</a>
+                    </div>
+                </div>
 
-                    <div>
-                        <h1>{{ $user->name }} {{ $user->surname }}</h1>
-                    </div>
-                    
-                    <div>
-                        <img src="{{ asset('storage/'.$doctor->picture) }}" width="500px">
-                    </div>
-
-                    <div>
-                        <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Dashboard</a>
-                    </div>
+                {{-- IMMAGINE PROFILO UTENTE --}}
+                <div >
+                    <img src="{{ asset('storage/' . $doctor->picture) }}" width="300px">
                 </div>
 
                 <div>
