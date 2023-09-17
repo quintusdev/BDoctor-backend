@@ -5,15 +5,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="col-12 mt-4 d-flex justify-content-between">
-                    {{-- <div>
-                        @if (!empty($doctor->picture))
-                            <img src="{{ asset('storage/public/images' . $doctor->picture) }}" alt="Immagine Profilo"
-                                class="image_show card product_card" style="width: 300px">
-                        @else
-                            <img src="{{ asset('storage/public/images' . $doctor->immagine_predefinita) }}"
-                                alt="Immagine Predefinita">
-                        @endif
-                    </div> --}}
                     {{-- NOME UTENTE --}}
                     <div class="d-flex col-10 align-items-center mt-1">
                         <h1>Benvenuto {{ $user->name }} {{ $user->surname }}</h1>

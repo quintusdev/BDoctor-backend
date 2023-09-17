@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ReviewController as ReviewController;
 use App\Http\Controllers\Admin\SpecializationController as SpecializationController;
 use App\Http\Controllers\Admin\SponsorController as SponsorController;
 use App\Http\Controllers\Admin\VoteController as VoteController;
+use App\Http\Controllers\Admin\StatisticController as StatisticController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('votes', VoteController::class);
     Route::resource('sponsors', SponsorController::class);
     Route::resource('specializations', SpecializationController::class);
+    Route::resource('statistics', StatisticController::class);
 });
 
 
