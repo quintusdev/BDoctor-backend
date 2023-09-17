@@ -22,17 +22,17 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="row row-cols-1 row-cols-md-2 g-4">
-                                    <div class="col">
+                                    <div class="col w-auto">
                                         <div class="card">
-                                            <img src="{{ asset('storage/doctor-profile2.png') }}" style="width:200px;"
-                                                class="card-img-top d-flex justify-center" alt="Immagine profilo dottore">
-                                            <div class="card-body d-flex justify-content-center align-items-center">
-                                                <span class="card-title">Profilo</span>
+                                            <img src="{{ asset('storage/doctor-profile2.png') }}" style="width:250px;"
+                                                class="card-img-top mx-auto" alt="Immagine profilo dottore">
+                                            <div class="card-body text-center">
+                                                <span class="card-title"><strong>Profilo</strong></span>
                                                 <p class="card-text">Vedi e gestisci il tuo profilo</p>
                                             </div>
-                                            <div class="card-footer d-flex justify-content-center">
-                                                <button type="button" title="Vedi profilo"
-                                                    class="btn btn-outline-primary">Gestisci</button>
+                                            <div class="card-footer text-center">
+                                                <a href="{{ route('admin.doctors.index') }}"
+                                                    class="btn btn-sm btn-primary">Gestisci</a>
                                             </div>
                                         </div>
                                     </div>
