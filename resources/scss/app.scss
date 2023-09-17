@@ -1,2 +1,44 @@
 @import '~bootstrap/scss/bootstrap';
 @import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
+/* style sidebar dashboard */
+.sidebar {
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.sidebar-button {
+    display: block;
+    width: 90%;
+    margin: 10px, 10px;
+    padding: 10px 20px;
+    text-align: left;
+    background-color: #044df9;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+    border-radius: 10px;
+    /* Aggiunto il bordo arrotondato */
+}
+
+.sidebar-button:not(:last-child) {
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+/* Aggiungi il bordo arrotondato anche all'ultimo pulsante */
+.sidebar-button:last-child {
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.sidebar-button:hover {
+    background-color: #4dacff;
+    transform: translateY(-4px);
+}
+
+
+/* fine style dashboard */

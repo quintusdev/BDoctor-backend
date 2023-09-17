@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Auth\Str;
+use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Doctor;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -19,7 +20,7 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create()
     {
         return view('auth.register');
     }
@@ -34,17 +35,30 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:200'],
+            'phone' => ['required', 'string', 'max:13'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        /* Genero lo slug con il nome e cognome */
+        $slug = Str::slug($request->name . ' ' . $request->surname, '-');
 
         $user = User::create([
             'name' => $request->name,
             'surname' => $request->surname,
             'email' => $request->email,
+            'slug' => $slug,
             'password' => Hash::make($request->password),
-            'slug' => $this->generateUserSlugFromName($request->name, $request->surname),
         ]);
+
+        $doctor = new Doctor([
+            'user_id' => $user->id,
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+        ]);
+
+        $doctor->save();
 
         event(new Registered($user));
 
