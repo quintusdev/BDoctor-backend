@@ -36,14 +36,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col w-auto">
                                         <div class="card">
-                                            <img src="..." class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">This is a longer card with supporting text below as a
-                                                    natural lead-in to additional content. This content is a little bit
-                                                    longer.</p>
+                                            <img src="{{ asset('storage/doctor-profile2.png') }}" style="width:250px;"
+                                                class="card-img-top mx-auto" alt="Grafico Statistiche">
+                                            <div class="card-body text-center">
+                                                <span class="card-title"><strong>Le tue statistiche</strong></span>
+                                                <p class="card-text">Vedi le tue statistiche</p>
+                                            </div>
+                                            <div class="card-footer text-center">
+                                                <a href="{{ route('admin.doctors.statistic') }}"
+                                                    class="btn btn-sm btn-primary">Visualizza</a>
                                             </div>
                                         </div>
                                     </div>
