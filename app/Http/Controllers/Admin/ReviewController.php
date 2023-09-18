@@ -75,9 +75,6 @@ class ReviewController extends Controller
             $reviews = $doctor->reviews;
         }
 
-        $doctor = Auth::user(); // Supponiamo che il medico sia autenticato
-        $reviews = $doctor->reviews()->with('votes')->get();
-
         return view('admin.reviews.show', compact('user', 'reviews', 'doctor'));
     }
 
