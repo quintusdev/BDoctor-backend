@@ -45,8 +45,8 @@
                                                 <p class="card-text">Vedi le tue statistiche</p>
                                             </div>
                                             <div class="card-footer text-center">
-                                                <a href="{{ route('admin.doctors.statistic') }}"
-                                                    class="btn btn-sm btn-primary">Visualizza</a>
+                                                {{-- <a href="{{ route('admin.doctors.statistic') }}"
+                                                    class="btn btn-sm btn-primary">Visualizza</a> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                     <a class="nav-link" href=" {{ route('reviews') }} ">Recensioni</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="" {{ route('statistics') }} ">Statistiche</a>
+                                    <a class="nav-link" href=" {{ route('statistics') }} ">Statistiche</a>
                                 </li>
                             </ul>
                         </div>

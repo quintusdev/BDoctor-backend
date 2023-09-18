@@ -68,8 +68,10 @@ class DoctorController extends Controller
     {
         // Ottieni l'ID dell'utente attualmente autenticato
         $user_id = Auth::id();
+
         // Ottieni l'oggetto dell'utente attualmente autenticato
         $user = Auth::user();
+
         // Cerca il dottore associato all'utente corrente utilizzando l'ID utente
         $doctors = Doctor::where('user_id', $user_id)->first();
 
@@ -90,8 +92,10 @@ class DoctorController extends Controller
         $specializations = Specialization::all();
         // Ottieni l'ID dell'utente attualmente autenticato
         $user_id = Auth::id();
+
         // Ottieni l'oggetto dell'utente attualmente autenticato
         $user = Auth::user();
+
         // Cerca il dottore associato all'utente corrente utilizzando l'ID utente
         $doctors = Doctor::where('user_id', $user_id)->first();
 
@@ -130,6 +134,19 @@ class DoctorController extends Controller
 
             // Aggiorna il campo 'picture' nei dati del modulo con il nuovo percorso dell'immagine
             $form_data['picture'] = $path;
+        }
+
+        if ($request->hasFile('cv')) {
+            // Se il dottore ha già un file associato, elimina il vecchio file dallo storage
+            if ($doctor->cv) {
+                Storage::delete($doctor->cv);
+            }
+
+            // Salvo il nuovo file nello storage e ottieni il percorso
+            $path = Storage::put('doctor_cv', $request->cv);
+
+            // Aggiorna il campo 'cv' nei dati del modulo con il nuovo percorso del file
+            $form_data['cv'] = $path;
         }
 
         // Altri aggiornamenti del modello Doctor se necessario
