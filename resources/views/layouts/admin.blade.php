@@ -94,7 +94,7 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-3 px-0">
+                    <div class="col-2 px-0">
                         <div class="sidebar">
                             <!-- Sidebar -->
                             <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse">
@@ -126,7 +126,7 @@
                             </nav>
                         </div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-10">
                         <div class="padding_main">
                             @yield('content')
                         </div>
