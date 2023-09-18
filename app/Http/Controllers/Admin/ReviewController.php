@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Review;
+use App\Models\Doctor;
 use App\Http\Requests\StoreReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
 
@@ -16,8 +18,21 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        // Ottieni l'oggetto dell'utente attualmente autenticato
+        $user = Auth::user();
+
+        // Ottieni l'oggetto del medico associato all'utente autenticato
+        $doctor = $user->doctor;
+
+        // Assicurati che il medico esista prima di cercare le recensioni
+        if ($doctor) {
+            // Ottieni solo le recensioni associate al medico
+            $reviews = $doctor->reviews;
+        }
+
+        return view('admin.reviews.index', compact('user', 'reviews', 'doctor'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -48,7 +63,22 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        //
+        // Ottieni l'oggetto dell'utente attualmente autenticato
+        $user = Auth::user();
+
+        // Ottieni l'oggetto del medico associato all'utente autenticato
+        $doctor = $user->doctor;
+
+        // Assicurati che il medico esista prima di cercare le recensioni
+        if ($doctor) {
+            // Ottieni solo le recensioni associate al medico
+            $reviews = $doctor->reviews;
+        }
+
+        $doctor = Auth::user(); // Supponiamo che il medico sia autenticato
+        $reviews = $doctor->reviews()->with('votes')->get();
+
+        return view('admin.reviews.show', compact('user', 'reviews', 'doctor'));
     }
 
     /**

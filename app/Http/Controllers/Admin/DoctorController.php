@@ -78,7 +78,11 @@ class DoctorController extends Controller
         // Ottieni il dottore associato all'utente utilizzando la relazione definita nel modello User
         $doctor = $user->doctor;
 
-        return view('admin.doctors.show', compact('doctor', 'doctors', 'user', 'user_id'));
+        $doctor = Doctor::find($doctor->id);
+
+        $votes = $doctor->votes;
+
+        return view('admin.doctors.show', compact('doctor', 'doctors', 'user', 'user_id', 'votes'));
     }
 
     /**

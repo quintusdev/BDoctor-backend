@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vote;
+use App\Models\Doctor;
 use App\Http\Requests\StoreVoteRequest;
 use App\Http\Requests\UpdateVoteRequest;
 
@@ -16,7 +17,8 @@ class VoteController extends Controller
      */
     public function index()
     {
-        //
+        $votes = Vote::all();
+        return view('votes.index', compact('votes'));
     }
 
     /**
@@ -48,7 +50,9 @@ class VoteController extends Controller
      */
     public function show(Vote $vote)
     {
-        //
+        $vote = Vote::find($vote->id);
+        $doctors = $vote->doctors;
+        return view('votes.show', compact('vote', 'doctors'));
     }
 
     /**
