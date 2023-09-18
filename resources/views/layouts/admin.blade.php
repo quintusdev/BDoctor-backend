@@ -105,24 +105,24 @@
                                     <a href="{{ route('admin.dashboard') }}"
                                         class="list-group-item list-group-item-action py-2 ripple sidebar-button {{ Route::currentRouteName() === 'admin.dashboard' ? 'list-group-item-action list-group-item-danger' : '' }}"
                                         aria-current="true">
-                                        <i class="fas fa-tachometer-alt fa-fw fa-lg me-3"></i><span>Dashboard</span>
+                                        <i class="fas fa-tachometer-alt fa-fw fa-lg me-2"></i><span>Dashboard</span>
                                     </a>
                                     <a href="{{ route('admin.doctors.index') }}"
                                         class="list-group-item py-2 ripple sidebar-button {{ Route::currentRouteName() === 'admin.doctors.index' ? 'list-group-item-action list-group-item-danger' : '' }}">
-                                        <i class="fa-solid fa-address-card fa-lg me-3"></i><span>Gestione Profilo</span>
+                                        <i class="fa-solid fa-address-card fa-lg me-2"></i><span>Gestione Profilo</span>
                                     </a>
                                     <a href="{{ route('admin.messages.index') }}"
                                         class="list-group-item py-2 ripple sidebar-button {{ Route::currentRouteName() === 'admin.messages.index' ? 'list-group-item-action list-group-item-danger' : '' }}">
-                                        <i class="fa-solid fa-message fa-lg me-3"></i></i><span>I miei messaggi</span>
+                                        <i class="fa-solid fa-message fa-lg me-2"></i></i><span>I miei messaggi</span>
                                     </a>
                                     <a href="{{ route('admin.reviews.index') }}"
                                         class="list-group-item py-2 ripple sidebar-button {{ Route::currentRouteName() === 'admin.reviews.index' ? 'list-group-item-action list-group-item-danger' : '' }}">
-                                        <i class="fa-regular fa-comment-dots fa-lg me-3"></i><span>Reviews
+                                        <i class="fa-regular fa-comment-dots fa-lg me-2"></i><span>Reviews
                                             pazienti</span>
                                     </a>
                                     <a href="{{ route('admin.statistics.index') }}"
                                         class="list-group-item py-2 ripple sidebar-button {{ Route::currentRouteName() === 'admin.statistics.index' ? 'list-group-item-action list-group-item-danger' : '' }}">
-                                        <i class="fa-solid fa-chart-column fa-lg me-3"></i><span>Statistiche
+                                        <i class="fa-solid fa-chart-column fa-lg me-2"></i><span>Statistiche
                                             Profilo</span>
                                     </a>
                                 </div>
