@@ -18,7 +18,9 @@
         </div>
         <div class="row">
             <div class="col-12 col-sm-8">
-                <canvas id="myChart" width="200" height="100"></canvas>
+                <div class="card">
+                    <canvas id="myChart" width="200" height="100"></canvas>
+                </div>
             </div>
         </div>
     </div>
