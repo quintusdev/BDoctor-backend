@@ -1,10 +1,17 @@
 @import '~bootstrap/scss/bootstrap';
 @import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 
+// baackground sito
+body {
+    background-image: url(../../storage/app/public/background-site.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 /* style sidebar dashboard */
 .sidebar {
     width: 300px;
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0);
     padding: 20px;
 }
 
