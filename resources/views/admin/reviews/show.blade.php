@@ -31,7 +31,6 @@
                                 <div class="card-content text-center">
                                     <h4 class="mb-4"><strong>{{ $review->name }} {{ $review->surname }}</strong></h4>
                                     <hr>
-                                    <h5 class="mb-4">{{ $review->vote }}</h5>
                                     <h5 class="mb-4">{{ $review->text }}</h5>
                                     <hr>
                                     <small><em>Recensione del {{ $review->created_at }}</em></small>
