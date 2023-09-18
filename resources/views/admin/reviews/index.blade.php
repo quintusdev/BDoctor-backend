@@ -24,21 +24,22 @@
                     </div>
                 </div>
 
-                @foreach ($reviews as $review)
-                    <h4>Nome: {{ $review->name }}</h4>
-                    <h4>Cognome: {{ $review->surname }}</h4>
-                    <h5>E-Mail: {{ $review->email }}</h5>
-                    @if ($review->pivot)
-                        <h5>Voto: {{ $review->pivot->vote }}</h5>
-                    @else
-                        <h5>Nessun voto disponibile</h5>
-                    @endif
-                    <h5>Recensione: {{ $review->text }}</h5>
-                    <div class="d-flex col-2 align-items-center mt-1">
-                        <a href="{{ route('admin.reviews.show', $review->id) }}" class="btn btn-sm btn-primary">Visualizza
-                            Recensioni</a>
-                    </div>
-                @endforeach
+                <div class="row me-5">
+                    @foreach ($reviews as $review)
+                        <div class="col-12 col-md-4">
+                            <div class="card mt-4">
+                                <div class="card-body">
+                                    <div class="card-content text-center">
+                                        <h4>{{ $review->name }} {{ $review->surname }}</h4>
+                                        <h5 class="mb-4">{{ $review->email }}</h5>
+                                        <a href="{{ route('admin.reviews.show', $review->id) }}"
+                                            class="btn btn-sm btn-primary">Visualizza Recensione</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

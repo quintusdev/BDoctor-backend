@@ -61,21 +61,12 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function show(Review $review)
+    public function show(Review  $review)
     {
         // Ottieni l'oggetto dell'utente attualmente autenticato
         $user = Auth::user();
 
-        // Ottieni l'oggetto del medico associato all'utente autenticato
-        $doctor = $user->doctor;
-
-        // Assicurati che il medico esista prima di cercare le recensioni
-        if ($doctor) {
-            // Ottieni solo le recensioni associate al medico
-            $reviews = $doctor->reviews;
-        }
-
-        return view('admin.reviews.show', compact('user', 'reviews', 'doctor'));
+        return view('admin.reviews.show', compact('user', 'review'));
     }
 
     /**

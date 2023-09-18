@@ -23,13 +23,11 @@
                         <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Torna alla Dashboard</a>
                     </div>
                 </div>
-                <h1>Visualizzo tutte le recensioni</h1>
-                @foreach ($reviews as $review)
-                    <h4>{{ $review->name }}</h4>
-                    <h4>{{ $review->surname }}</h4>
-                    <h5>{{ $review->email }}</h5>
-                    <h5>{{ $review->text }}</h5>
-                @endforeach
+                <h1>Recensione:</h1>
+                <h4>Nome: {{ $review->name }}</h4>
+                <h3>Cognome: {{ $review->surname }}</h3>
+                <hr>
+                <h4>Recensione: {{ $review->text }}</h4>
             </div>
         </div>
     </div>

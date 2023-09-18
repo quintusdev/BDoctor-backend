@@ -23,13 +23,11 @@
                         <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Torna alla Dashboard</a>
                     </div>
                 </div>
-                <h1>Visualizzo tutti i messaggi</h1>
-                @foreach ($messages as $message)
-                    <h4>{{ $message->name }}</h4>
-                    <h4>{{ $message->surname }}</h4>
-                    <h5>{{ $message->email }}</h5>
-                    <h5>{{ $message->text }}</h5>
-                @endforeach
+                <h1>Messaggio:</h1>
+                <h4>Nome: {{ $message->name }}</h4>
+                <h3>Cognome: {{ $message->surname }}</h3>
+                <h3>E-mail: {{ $message->email }}</h3>
+                <h4>Testo del messaggio: {{ $message->text }}</h4>
             </div>
         </div>
     </div>
