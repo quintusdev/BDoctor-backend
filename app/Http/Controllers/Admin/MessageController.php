@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Message;
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
@@ -16,7 +17,13 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        // Ottieni l'oggetto dell'utente attualmente autenticato
+        $user = Auth::user();
+
+        // Ottieni solo i messaggi dell'utente autenticato
+        $messages = $user->messages;
+
+        return view('admin.messages.index', compact('user', 'messages'));
     }
 
     /**

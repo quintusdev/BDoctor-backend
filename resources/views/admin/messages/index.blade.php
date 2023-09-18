@@ -24,40 +24,12 @@
                     </div>
                 </div>
 
-                {{-- IMMAGINE PROFILO UTENTE --}}
-                <div >
-                    <img src="{{ asset('storage/' . $doctor->picture) }}" width="300px">
-                </div>
-
-                <div>
-                    <h4>Indirizzo: {{ $doctor->address }}</h4>
-                </div>
-
-                <div>
-                    <h4>CV: {{ $doctor->cv }}</h4>
-                    <iframe src="{{ asset('folder/file_name.pdf') }}" width="50%" height="600">
-                    </iframe>
-                </div>
-
-                <div>
-                    <h4>N. telefono: {{ $doctor->phone }}</h4>
-                </div>
-
-                <div>
-                    <h4>Prestazioni: {{ $doctor->medical_service }}</h4>
-                </div>
-                {{-- <div>
-                    <strong>Tecnologie:</strong>
-                    @if ($project->technologies)
-                        @foreach ($project->technologies as $technology)
-                            <a href="">{{ $technology->name }}</a>
-                        @endforeach
-                    @endif
-                </div> --}}
-
-                {{-- <p>
-                    {{ $project->content }}
-                </p> --}}
+                @foreach ($messages as $message)
+                    <h4>{{ $message->name }}</h4>
+                    <h4>{{ $message->surname }}</h4>
+                    <h5>{{ $message->email }}</h5>
+                    <h5>{{ $message->text }}</h5>
+                @endforeach
             </div>
         </div>
     </div>

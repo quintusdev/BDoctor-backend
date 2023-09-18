@@ -108,8 +108,8 @@
                                         class="list-group-item py-2 ripple sidebar-button {{ Route::currentRouteName() === 'admin.doctors.index' ? 'list-group-item-action list-group-item-danger' : '' }}">
                                         <i class="fa-solid fa-address-card fa-lg me-3"></i><span>Gestione Profilo</span>
                                     </a>
-                                    <a href="{{ route('admin.doctors.index') }}"
-                                        class="list-group-item py-2 ripple sidebar-button {{ Route::currentRouteName() === 'admin.doctors.index' ? 'list-group-item-action list-group-item-danger' : '' }}">
+                                    <a href="{{ route('admin.messages.index') }}"
+                                        class="list-group-item py-2 ripple sidebar-button {{ Route::currentRouteName() === 'admin.messages.index' ? 'list-group-item-action list-group-item-danger' : '' }}">
                                         <i class="fa-solid fa-message fa-lg me-3"></i></i><span>I miei messaggi</span>
                                     </a>
                                     <a href="{{ route('admin.doctors.index') }}"
