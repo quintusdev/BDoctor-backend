@@ -18,7 +18,7 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         // Ottieni l'oggetto dell'utente attualmente autenticato
         $user = Auth::user();
 
@@ -56,14 +56,16 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Message $message)
-    {
+    {   
+
+        $message =  Message::all();
         // Ottieni l'oggetto dell'utente attualmente autenticato
         $user = Auth::user();
 
         // Ottieni solo i messaggi dell'utente autenticato
         $messages = $user->messages;
 
-        return view('admin.messages.show', compact('user', 'messages'));
+        return view('admin.messages.show', compact('user', 'messages', 'message'));
     }
 
     /**
