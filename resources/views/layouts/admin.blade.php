@@ -17,6 +17,9 @@
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
+
+    {{-- SCRIPT CHART JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -117,8 +120,8 @@
                                         <i class="fa-regular fa-comment-dots fa-lg me-3"></i><span>Reviews
                                             pazienti</span>
                                     </a>
-                                    <a href="{{ route('admin.doctors.index') }}"
-                                        class="list-group-item py-2 ripple sidebar-button {{ Route::currentRouteName() === 'admin.doctors.index' ? 'list-group-item-action list-group-item-danger' : '' }}">
+                                    <a href="{{ route('admin.statistics.index') }}"
+                                        class="list-group-item py-2 ripple sidebar-button {{ Route::currentRouteName() === 'admin.statistics.index' ? 'list-group-item-action list-group-item-danger' : '' }}">
                                         <i class="fa-solid fa-chart-column fa-lg me-3"></i><span>Statistiche
                                             Profilo</span>
                                     </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class StatisticController extends Controller
@@ -14,7 +15,13 @@ class StatisticController extends Controller
      */
     public function index()
     {
-        //
+        // Ottieni l'ID dell'utente attualmente autenticato
+        $user_id = Auth::id();
+
+        // Ottieni l'oggetto dell'utente attualmente autenticato
+        $user = Auth::user();
+
+        return view('admin.statistics.index', compact('user', 'user_id'));
     }
 
     /**
