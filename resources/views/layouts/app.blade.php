@@ -68,7 +68,7 @@
                                 {{-- MENU DASHBOARD --}}
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item"
-                                        href="{{ route('admin.doctors.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        href="{{ route('admin.doctors.index') }}">{{ __('Dashboard') }}</a>
                                     <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();

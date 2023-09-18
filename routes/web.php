@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ReviewController as ReviewController;
 use App\Http\Controllers\Admin\SpecializationController as SpecializationController;
 use App\Http\Controllers\Admin\SponsorController as SponsorController;
 use App\Http\Controllers\Admin\VoteController as VoteController;
+use App\Http\Controllers\Admin\StatisticController as StatisticController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -37,13 +38,13 @@ Route::middleware('auth')->group(function () {
 /* Rotta per dashboard utente registrato */
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    // Route::get('statistic', AdminController::class)->name('statistic');
     Route::resource('doctors', DoctorController::class);
     Route::resource('messages', MessageController::class);
     Route::resource('reviews', ReviewController::class);
     Route::resource('votes', VoteController::class);
     Route::resource('sponsors', SponsorController::class);
     Route::resource('specializations', SpecializationController::class);
+    Route::resource('statistics', StatisticController::class);
 });
 
 
