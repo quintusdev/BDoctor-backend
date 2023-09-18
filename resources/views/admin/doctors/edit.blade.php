@@ -12,6 +12,7 @@
                         <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Torna alla Dashboard</a>
                     </div>
                 </div>
+
                 {{-- FORM DI EDIT DEL PROFILO --}}
                 <div>
                     <form action="{{ route('admin.doctors.update', $user->id) }}" method="POST"
@@ -28,6 +29,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
                         </div>
+
                         {{-- MODIFICA CAMPO COGNOME --}}
                         <div class="form-group col-3 mt-4">
                             <h5><strong>Cognome:</strong></h5>
@@ -37,6 +39,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
                         </div>
+
                         {{-- MODIFICA IMMAGINE DI PROFILO --}}
                         <div class="form-group col-6 mt-4">
                             <div>
@@ -50,6 +53,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
                         </div>
+                        
                         {{-- MODIFICA SPECIALIZZAZIONI --}}
                         <div class="form-group mt-4">
                             <div class="mt-2">
@@ -65,11 +69,15 @@
                                     </div>
                                 @endforeach
                             </div>
+
                             {{-- CARICAMENTO FILE CV --}}
+                            <div>
+                                <h5><strong>Inserisci il tuo curriculum:</strong></h5>
+                            </div>
+                            <div>
+                                <iframe src="{{ asset('storage/' . $doctor->cv) }}" width="50%" height="600"></iframe>
+                            </div>
                             <div class="form-group col-3 mt-4">
-                                <div>
-                                    <h5><strong>Inserisci il tuo curriculum:</strong></h5>
-                                </div>
                                 <input type="file" class="form-control @error('cv') is-invalid @enderror" name="cv"
                                     id="cv">
                                 {{-- @error('picture')
