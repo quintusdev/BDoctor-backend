@@ -80,7 +80,6 @@ class DoctorController extends Controller
 
         $doctor = Doctor::find($doctor->id);
 
-
         return view('admin.doctors.show', compact('doctor', 'doctors', 'user', 'user_id'));
     }
 
