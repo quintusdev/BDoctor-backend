@@ -149,10 +149,12 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'specializations' => [
+            'required' => 'Seleziona almeno un tipo di specializzazione.',
         ],
     ],
+    
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +167,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'address' => 'indirizzo',
+        'name' => 'nome',
+        'surname' => 'cognome',
+        'phone' => 'numero di telefono',
+    ],
 
 ];

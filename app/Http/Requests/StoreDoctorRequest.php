@@ -24,19 +24,12 @@ class StoreDoctorRequest extends FormRequest
     public function rules()
     {
         return [
-            'address' => 'required | max:80',
-            'phone' => 'required | max:13',
+            //
         ];
     }
 
     public function messages()
     {
-        return [
-            'address.required' => __('L\'indirizzo è obbligatorio'),
-            'address.max' => __('L\'indirizzo può essere lungo al massimo :max caratteri.'),
-
-            'phone.required' => __('Il numero di telefono è obbligatorio'),
-            'phone.max' => __('Il numero di telefono può essere lungo al massimo :max cifre.')
-        ];
+        //
     }
 }
