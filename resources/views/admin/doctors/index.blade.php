@@ -4,46 +4,49 @@
     <div class="container">
         <div class="row">
             <h2 class="my-4 text-secondary">Il mio profilo</h2>
-            <div class="col-12 d-flex justify-content-center">
-                <div class="bg-white rounded-5 text-center">
-                    <img class="rounded-top-5" src="{{ asset('storage/doctor-profile2.png') }}" alt="immagine profilo dottore"
+            <div class="col-12 d-flex justify-content-start">
+                <div class="bg-white rounded-5 text-left d-flex align-items-center p-1">
+                    <img class="rounded-5 m-4" src="{{ asset('storage/doctor-profile2.png') }}" alt="immagine profilo dottore"
                         style="width: 300px">
-                    <h3 class="mt-2">{{ $user->name }} {{ $user->surname }}</h3>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <p class="text-center n_telefono">N. Telefono</p>
+                    <div class="m-3 justify-content-center p-4">
+                        <h3>{{ $user->name }} {{ $user->surname }}</h3>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <p class="n_telefono">N. Telefono</p>
+                            </div>
+                            <div class="col">
+                                <p class="n_telefono">{{ $doctor->phone }}</p>
+                            </div>
                         </div>
-                        <div class="col">
-                            <p class="text-center n_telefono">{{ $doctor->phone }}</p>
+                        <hr class="mt-2">
+                        <div class="row mt-2">
+                            <div class="col">
+                                <p class="n_telefono">Indirizzo</p>
+                            </div>
+                            <div class="col">
+                                <p class="n_telefono">{{ $doctor->address }}</p>
+                            </div>
                         </div>
-                        <hr class="text-center" style="width: 80%; margin: auto; margin-top: -13px ">
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <p class="text-center n_telefono">Indirizzo</p>
+                        <hr class="mt-2">
+                        <div class="row mt-2">
+                            <div class="col">
+                                <h5>Visualizza</h5>
+                                <a class="d-flex btn btn-info btn-md justify-content-center mt-4" title="Visualizza profilo"
+                                    href="{{ route('admin.doctors.show', $doctor->id) }}"><i class="fas fa-eye"></i></a>
+                            </div>
+                            <div class="col">
+                                <h5>Modifica</h5>
+                                <a class="d-flex btn btn-warning btn-md justify-content-center mt-4"
+                                    title="Modifica profilo" href="{{ route('admin.doctors.edit', $doctor->id) }}"><i
+                                        class="fas fa-pen"></i></a>
+                            </div>
                         </div>
-                        <div class="col">
-                            <p class="text-center n_telefono">{{ $doctor->address }}</p>
-                        </div>
-                        <hr class="text-center" style="width: 80%; margin: auto; margin-top: -13px ">
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <h5>Visualizza</h5>
-                            <a class="btn btn-info btn-sm" title="Visualizza profilo"
-                                href="{{ route('admin.doctors.show', $doctor->id) }}"><i class="fas fa-eye"></i></a>
-                        </div>
-                        <div class="col">
-                            <h5>Modifica</h5>
-                            <a class="btn btn-warning btn-sm" title="Modifica profilo"
-                                href="{{ route('admin.doctors.edit', $doctor->id) }}"><i class="fas fa-pen"></i></a>
-                        </div>
-                    </div>
-                    <div class="row mt-2 mb-3">
-                        <div class="col">
-                            <a class="btn btn-success btn-md mt-4" href={{-- "{{ route('admin.sponsor.show', $doctor->id) }}" --}}>
-                                <i class="fa-solid fa-receipt fa-lg"></i>
-                                Metti in evidenza il tuo profilo!</a>
+                        <div class="row mt-5">
+                            <div class="col">
+                                <a class="btn btn-success btn-md" href="{{-- {{ route('admin.sponsor.show', $doctor->id) }} --}}">
+                                    <i class="fa-solid fa-receipt fa-lg"></i>
+                                    Metti in evidenza!</a>
+                            </div>
                         </div>
                     </div>
                 </div>
