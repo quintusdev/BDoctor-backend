@@ -25,6 +25,7 @@ class MessageController extends Controller
         // Ottieni solo i messaggi dell'utente autenticato
         $messages = $user->messages;
 
+        
         return view('admin.messages.index', compact('user', 'messages'));
     }
 

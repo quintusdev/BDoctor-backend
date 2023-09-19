@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Doctor;
+use App\Models\Specialization;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -22,8 +23,11 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $specializations = Specialization::all();
+
+        return view('auth.register', compact('specializations'));
     }
+
 
     /**
      * Handle an incoming registration request.
@@ -37,6 +41,7 @@ class RegisteredUserController extends Controller
             'surname' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:200'],
             'phone' => ['required', 'string', 'max:13'],
+            'specializations' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -59,6 +64,9 @@ class RegisteredUserController extends Controller
         ]);
 
         $doctor->save();
+
+        // Sincronizza le specializzazioni del dottore con quelle selezionate dall'utente durante la registrazione.
+        $doctor->specializations()->sync($request->input('specializations'));
 
         event(new Registered($user));
 

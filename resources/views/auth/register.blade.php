@@ -95,6 +95,20 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="mb-4 row">
+                                <h4><strong>Seleziona le tue Specializzazioni:</strong></h4>
+                                @foreach ($specializations as $specialization)
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch"
+                                            id="flexSwitchCheckDefault" name="specializations[]"
+                                            value="{{ $specialization->id }}">
+                                        <label class="form-check-label me-2" for="flexSwitchCheckDefault">
+                                            {{ $specialization->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+
                             {{-- CAMPO PASSWORD --}}
                             <div class="mb-4 row">
                                 <label for="password"
