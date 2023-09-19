@@ -5,18 +5,9 @@
         <div class="row">
             <div class="col-12">
                 <div class="col-12 mt-4 d-flex justify-content-between">
-                    {{-- <div>
-                        @if (!empty($doctor->picture))
-                            <img src="{{ asset('storage/public/images' . $doctor->picture) }}" alt="Immagine Profilo"
-                                class="image_show card product_card" style="width: 300px">
-                        @else
-                            <img src="{{ asset('storage/public/images' . $doctor->immagine_predefinita) }}"
-                                alt="Immagine Predefinita">
-                        @endif
-                    </div> --}}
                     {{-- NOME UTENTE --}}
                     <div class="d-flex col-10 align-items-center mt-1">
-                        <h1>Benvenuto {{ $review->name }} {{ $review->surname }}</h1>
+                        <h1>Reviews dei pazienti</h1>
                     </div>
                     {{-- BUTTON CHE RIPORTA ALLA DASHBOARD --}}
                     <div class="d-flex col-2 align-items-center mt-1">
