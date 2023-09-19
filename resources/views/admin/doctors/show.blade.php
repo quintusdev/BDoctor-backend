@@ -16,8 +16,8 @@
                 </div>
 
                 {{-- IMMAGINE PROFILO UTENTE --}}
-                <div >
-                    <img src="{{ asset('storage/' . $doctor->picture) }}" width="300px">
+                <div>
+                    <img src="{{ asset('storage/' . $doctor->picture) }}" width="200px">
                 </div>
 
                 <div>

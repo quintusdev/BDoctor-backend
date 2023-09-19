@@ -9,6 +9,15 @@
                     {{-- FORM REGISTRAZIONE --}}
                     <div class="card-body">
                         <p style="font-size: 0.7em; font-weight: bold;">i dati con il seguente simbolo "&ast;" sono obbligatori</p>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             {{-- CAMPO NOME --}}
@@ -22,7 +31,7 @@
                                         value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                     @error('name')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -39,7 +48,7 @@
                                         value="{{ old('surname') }}" required autocomplete="surname" autofocus>
 
                                     @error('surname')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -56,7 +65,7 @@
                                         value="{{ old('address') }}" required autocomplete="address" autofocus>
 
                                     @error('address')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -73,7 +82,7 @@
                                         value="{{ old('phone') }}" required autocomplete="phone" autofocus>
 
                                     @error('phone')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -90,12 +99,31 @@
                                         value="{{ old('email') }}" required autocomplete="email">
 
                                     @error('email')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="mb-4 row">
+                                <h4><strong>Seleziona le tue Specializzazioni:</strong></h4>
+                                @foreach ($specializations as $specialization)
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch"
+                                            id="flexSwitchCheckDefault" name="specializations[]"
+                                            value="{{ $specialization->id }}">
+                                        <label class="form-check-label me-2" for="flexSwitchCheckDefault">
+                                            {{ $specialization->name }}</label>
+                                    </div>
+                                @endforeach
+                                @error('specialization')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
                             {{-- CAMPO PASSWORD --}}
                             <div class="mb-4 row">
                                 <label for="password"
@@ -107,7 +135,7 @@
                                         required autocomplete="new-password">
 
                                     @error('password')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
