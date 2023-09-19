@@ -8,6 +8,15 @@
                     <div class="card-header">{{ __('Registrati come Professionista') }}</div>
                     {{-- FORM REGISTRAZIONE --}}
                     <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             {{-- CAMPO NOME --}}
@@ -21,7 +30,7 @@
                                         value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                     @error('name')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -38,7 +47,7 @@
                                         value="{{ old('surname') }}" required autocomplete="surname" autofocus>
 
                                     @error('surname')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -55,7 +64,7 @@
                                         value="{{ old('address') }}" required autocomplete="address" autofocus>
 
                                     @error('address')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -72,7 +81,7 @@
                                         value="{{ old('phone') }}" required autocomplete="phone" autofocus>
 
                                     @error('phone')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -89,7 +98,7 @@
                                         value="{{ old('email') }}" required autocomplete="email">
 
                                     @error('email')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -107,6 +116,11 @@
                                             {{ $specialization->name }}</label>
                                     </div>
                                 @endforeach
+                                @error('specialization')
+                                    <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             {{-- CAMPO PASSWORD --}}
@@ -120,7 +134,7 @@
                                         required autocomplete="new-password">
 
                                     @error('password')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
