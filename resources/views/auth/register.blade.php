@@ -8,12 +8,13 @@
                     <div class="card-header">{{ __('Registrati come Professionista') }}</div>
                     {{-- FORM REGISTRAZIONE --}}
                     <div class="card-body">
+                        <p style="font-size: 0.7em; font-weight: bold;">i dati con il seguente simbolo "&ast;" sono obbligatori</p>
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             {{-- CAMPO NOME --}}
                             <div class="mb-4 row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}&ast;</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -30,7 +31,7 @@
                             {{-- CAMPO COGNOME --}}
                             <div class="mb-4 row">
                                 <label for="surname"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Cognome') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Cognome') }}&ast;</label>
 
                                 <div class="col-md-6">
                                     <input id="surname" type="text"
@@ -47,7 +48,7 @@
                             {{-- CAMPO INDIRIZZO --}}
                             <div class="mb-4 row">
                                 <label for="address"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo') }}&ast;</label>
 
                                 <div class="col-md-6">
                                     <input id="address" type="text"
@@ -64,7 +65,7 @@
                             {{-- CAMPO TELEFONO --}}
                             <div class="mb-4 row">
                                 <label for="phone"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Numero di telefono') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Numero di telefono') }}&ast;</label>
 
                                 <div class="col-md-6">
                                     <input id="phone" type="text"
@@ -81,7 +82,7 @@
                             {{-- CAMPO E-MAIL --}}
                             <div class="mb-4 row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo E-Mail') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo E-Mail') }}&ast;</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -98,7 +99,7 @@
                             {{-- CAMPO PASSWORD --}}
                             <div class="mb-4 row">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}&ast;</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -115,7 +116,7 @@
                             {{-- CAMPO CONFERMA PASSWORD --}}
                             <div class="mb-4 row">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}&ast;</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
