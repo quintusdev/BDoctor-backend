@@ -20,6 +20,7 @@
                         @endif
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
+                            
                             {{-- CAMPO NOME --}}
                             <div class="mb-4 row">
                                 <label for="name"

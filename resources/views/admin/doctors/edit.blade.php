@@ -24,7 +24,7 @@
                         <div class="form-group col-3 mt-4">
                             <h5><strong>Nome:</strong></h5>
                             <input class="form-control @error('name')is-invalid @enderror" type="text" name="name"
-                                id="name" placeholder="Nome" value="{{ old('name') ?? $user->name }}">
+                                id="name" placeholder="Nome" value="{{ old('name') ?? $user->name }}" required>
                             {{-- @error('name')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
@@ -34,7 +34,7 @@
                         <div class="form-group col-3 mt-4">
                             <h5><strong>Cognome:</strong></h5>
                             <input class="form-control @error('surname')is-invalid @enderror" type="text" name="surname"
-                                id="surname" placeholder="Cognome" value="{{ old('surname') ?? $user->surname }}">
+                                id="surname" placeholder="Cognome" value="{{ old('surname') ?? $user->surname }}" required>
                             {{-- @error('surname')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
@@ -70,7 +70,7 @@
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch"
                                             id="flexSwitchCheckDefault" name="specializations[]"
-                                            value="{{ $specialization->id }}"
+                                            value="{{ $specialization->id }}" required
                                             {{ in_array($specialization->id, old('specializations', $doctor->specializations->pluck('id')->toArray())) ? 'checked' : '' }}>
                                         <label class="form-check-label me-2" for="flexSwitchCheckDefault">
                                             {{ $specialization->name }}</label>
