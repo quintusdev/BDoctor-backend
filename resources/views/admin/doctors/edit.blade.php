@@ -53,7 +53,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
                         </div>
-                        
+
                         {{-- MODIFICA SPECIALIZZAZIONI --}}
                         <div class="form-group mt-4">
                             <div class="mt-2">
@@ -63,9 +63,9 @@
                                         <input class="form-check-input" type="checkbox" role="switch"
                                             id="flexSwitchCheckDefault" name="specializations[]"
                                             value="{{ $specialization->id }}"
-                                            {{ in_array($specialization->id, old('specializations', $doctor->specializations->pluck('id')->toArray())) ? 'checked' : '' }}
-                                            <label class="form-check-label me-2" for="flexSwitchCheckDefault">
-                                        {{ $specialization->name }}</label>
+                                            {{ in_array($specialization->id, old('specializations', $doctor->specializations->pluck('id')->toArray())) ? 'checked' : '' }}>
+                                        <label class="form-check-label me-2" for="flexSwitchCheckDefault">
+                                            {{ $specialization->name }}</label>
                                     </div>
                                 @endforeach
                             </div>
