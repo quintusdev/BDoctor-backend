@@ -78,11 +78,10 @@ class DoctorController extends Controller
         // Ottieni il dottore associato all'utente utilizzando la relazione definita nel modello User
         $doctor = $user->doctor;
 
+        // Trova un medico nel database utilizzando l'ID specifico del medico
         $doctor = Doctor::find($doctor->id);
 
-        $votes = $doctor->votes;
-
-        return view('admin.doctors.show', compact('doctor', 'doctors', 'user', 'user_id', 'votes'));
+        return view('admin.doctors.show', compact('doctor', 'doctors', 'user', 'user_id'));
     }
 
     /**
@@ -103,9 +102,6 @@ class DoctorController extends Controller
         // Cerca il dottore associato all'utente corrente utilizzando l'ID utente
         $doctors = Doctor::where('user_id', $user_id)->first();
 
-        // Ottieni il dottore associato all'utente utilizzando la relazione definita nel modello User
-        $doctor = $user->doctor;
-
         return view('admin.doctors.edit', compact('specializations', 'doctor', 'doctors', 'user', 'user_id'));
     }
 
@@ -118,9 +114,16 @@ class DoctorController extends Controller
      */
     public function update(UpdateDoctorRequest $request, Doctor $doctor)
     {
+        // Ottieni l'ID dell'utente attualmente autenticato
         $user_id = Auth::id();
+
+        // Trova un utente nel database utilizzando l'ID specifico dell'utente
         $userDetail = User::findOrFail($user_id);
+
+        // Ottieni tutte le specializzazioni dal database
         $specializations = Specialization::all();
+
+        // Ottieni tutti i dati inviati tramite il modulo HTTP (i dati del form)
         $form_data = $request->all();
 
         // Otteniamo il dottore associato all'utente corrente
