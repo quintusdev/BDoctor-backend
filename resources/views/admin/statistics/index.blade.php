@@ -27,10 +27,10 @@
     <script>
         const ctx = document.getElementById('myChart').getContext('2d');
         const data = {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: {!! $labels !!}, // Utilizza i dati passati dalla vista
             datasets: [{
-                label: 'My First Dataset',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'Numero di Messaggi',
+                data: {!! $data !!},
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -52,11 +52,11 @@
         };
 
         const config = {
-            type: 'bar',
-            data: data,
-            options: {}
-        };
+        type: 'bar',
+        data: data,
+        options: {}
+    };
 
-        const myChart = new Chart(ctx, config);
+    const myChart = new Chart(ctx, config);
     </script>
 @endsection
