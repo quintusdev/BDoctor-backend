@@ -17,7 +17,11 @@
 
                 {{-- IMMAGINE PROFILO UTENTE --}}
                 <div>
-                    <img src="{{ asset('storage/' . $doctor->picture) }}" width="200px">
+                    @if(isset($doctor->picture))
+                        <img src="{{ asset('storage/' . $doctor->picture) }}" width="200px">
+                    @else
+                        <img src="" alt="">
+                    @endif
                 </div>
 
                 <div>
@@ -35,18 +39,6 @@
                 <div>
                     <h4>Prestazioni: {{ $doctor->medical_service }}</h4>
                 </div>
-                {{-- <div>
-                    <strong>Tecnologie:</strong>
-                    @if ($project->technologies)
-                        @foreach ($project->technologies as $technology)
-                            <a href="">{{ $technology->name }}</a>
-                        @endforeach
-                    @endif
-                </div> --}}
-
-                {{-- <p>
-                    {{ $project->content }}
-                </p> --}}
             </div>
         </div>
     </div>
