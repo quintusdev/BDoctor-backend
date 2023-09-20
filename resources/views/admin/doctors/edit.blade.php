@@ -40,6 +40,14 @@
                             @enderror
                         </div>
 
+                        <div class="form-group col-3 mt-4">
+                            <label for="phone"><strong>Modifica Numero di Telefono:</strong></label>
+                            <input class="form-control @error('phone') is-invalid @enderror" type="tel" name="phone" id="phone" placeholder="Numero di Telefono" value="{{ old('phone') ?? $doctor->phone }}">
+                            @error('phone')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         {{-- MODIFICA IMMAGINE DI PROFILO --}}
                         <div class="form-group col-6 mt-4">
                             <div>

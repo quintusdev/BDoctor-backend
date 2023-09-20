@@ -129,6 +129,9 @@ class DoctorController extends Controller
         // Otteniamo il dottore associato all'utente corrente
         $doctor = $userDetail->doctor;
 
+        // Aggiungo il campo 'phone' ai dati del modulo
+        $form_data['phone'] = $request->input('phone');
+
         // Verifica se è stata inviata una nuova immagine tramite il modulo
         if ($request->hasFile('picture')) {
             // Se il dottore ha già una foto associata, elimina la vecchia foto dallo storage
