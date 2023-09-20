@@ -1,56 +1,55 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="col-12 mt-4 d-flex justify-content-between">
-                    {{-- NOME UTENTE --}}
-                    <div class="d-flex col-10 align-items-center mt-1">
-                        <h4>Benvenuto {{ $user->name }} nella pagina statistiche</h4>
+<div class="container">
+    <div class="row">
+        <h2 class="my-4 text-secondary">Statistiche</h2>
+        <div class="col-12 d-flex justify-content-start">
+            <div class="bg-white rounded-5 text-left d-flex align-items-center p-1">
+                <img class="rounded-5 m-4" src="{{ asset('storage/doctor-profile2.png') }}" alt="immagine profilo dottore"
+                    style="width: 300px">
+                <div class="m-3 justify-content-center p-4">
+                    <h3>{{ $user->name }} {{ $user->surname }}</h3>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <p class="n_telefono">N. Telefono</p>
+                        </div>
+                        <div class="col">
+                            <p class="n_telefono">{{ $doctor->phone }}</p>
+                        </div>
                     </div>
-                    {{-- BUTTON CHE RIPORTA ALLA DASHBOARD --}}
-                    <div class="d-flex col-2 align-items-center mt-1">
-                        <a href="{{ route('admin.doctors.dashboard') }}" class="btn btn-sm btn-primary">Torna alla
-                            Dashboard</a>
+                    <hr class="mt-2">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <p class="n_telefono">Indirizzo</p>
+                        </div>
+                        <div class="col">
+                            <p class="n_telefono">{{ $doctor->address }}</p>
+                        </div>
+                    </div>
+                    <hr class="mt-2">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <h5>Visualizza</h5>
+                            <a class="d-flex btn btn-info btn-md justify-content-center mt-4" title="Visualizza profilo"
+                                href="{{ route('admin.doctors.show', $doctor->id) }}"><i class="fas fa-eye"></i></a>
+                        </div>
+                        <div class="col">
+                            <h5>Modifica</h5>
+                            <a class="d-flex btn btn-warning btn-md justify-content-center mt-4"
+                                title="Modifica profilo" href="{{ route('admin.doctors.edit', $doctor->id) }}"><i
+                                    class="fas fa-pen"></i></a>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col">
+                            <a class="btn btn-success btn-md" href="{{-- {{ route('admin.sponsor.show', $doctor->id) }} --}}">
+                                <i class="fa-solid fa-receipt fa-lg"></i>
+                                Metti in evidenza!</a>
+                        </div>
                     </div>
                 </div>
-
-                {{-- IMMAGINE PROFILO UTENTE --}}
-                <div>
-                    <img src="{{ asset('storage/' . $doctor->picture) }}" width="300px">
-                </div>
-
-                <div>
-                    <h4>Indirizzo: {{ $doctor->address }}</h4>
-                </div>
-
-                <div>
-                    <h4>CV: {{ $doctor->cv }}</h4>
-                    <iframe src="{{ asset('folder/file_name.pdf') }}" width="50%" height="600">
-                    </iframe>
-                </div>
-
-                <div>
-                    <h4>N. telefono: {{ $doctor->phone }}</h4>
-                </div>
-
-                <div>
-                    <h4>Prestazioni: {{ $doctor->medical_service }}</h4>
-                </div>
-                {{-- <div>
-                    <strong>Tecnologie:</strong>
-                    @if ($project->technologies)
-                        @foreach ($project->technologies as $technology)
-                            <a href="">{{ $technology->name }}</a>
-                        @endforeach
-                    @endif
-                </div> --}}
-
-                {{-- <p>
-                    {{ $project->content }}
-                </p> --}}
             </div>
         </div>
     </div>
-@endsection
+</div>@endsection

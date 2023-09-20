@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Doctor;
 use App\Models\User;
 use App\Models\Specialization;
+use App\Models\Sponsor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreDoctorRequest;
