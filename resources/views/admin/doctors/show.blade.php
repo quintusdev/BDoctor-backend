@@ -18,9 +18,9 @@
                 {{-- IMMAGINE PROFILO UTENTE --}}
                 <div>
                     @if(isset($doctor->picture))
-                        <img src="{{ asset('storage/' . $doctor->picture) }}" width="200px">
+                        <img src="{{ asset('storage/' . $doctor->picture) }}" class="img-profile">
                     @else
-                        <img src="" alt="">
+                        <img src="{{ asset('storage/profile_default.jpg') }}" alt="immagine di default" class="img-profile">
                     @endif
                 </div>
 
@@ -29,7 +29,11 @@
                 </div>
 
                 <div>
-                    <iframe src="{{ asset('storage/' . $doctor->cv) }}" width="50%" height="600"></iframe>
+                    @if(isset($doctor->cv))
+                        <iframe src="{{ asset('storage/' . $doctor->cv) }}" width="50%" height="600"></iframe>
+                    @else
+                        {{-- <img src="{{ asset('storage/') }}" alt="immagine di default"> --}}
+                    @endif
                 </div>
 
                 <div>

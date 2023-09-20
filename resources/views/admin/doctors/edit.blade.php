@@ -52,8 +52,11 @@
                         <div class="form-group col-6 mt-4">
                             <div>
                                 <h5><strong>Inserisci o aggiorna la tua immagine profilo:</strong></h5>
-                                <img src="{{ asset('storage/' . $doctor->picture) }}" width="500px">
-                                <caption>Immagine Profilo</caption>
+                                @if(isset($doctor->picture))
+                                    <img src="{{ asset('storage/' . $doctor->picture) }}" class="img_profile">
+                                @else
+                                    <img src="{{ asset('storage/profile_default.jpg') }}" alt="immagine di default" class="img_profile">
+                                @endif
                             </div>
                             <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture"
                                 id="picture">
@@ -82,9 +85,11 @@
                             <div>
                                 <h5><strong>Inserisci il tuo curriculum:</strong></h5>
                             </div>
-                            <div>
+                            @if(isset($doctor->cv))
                                 <iframe src="{{ asset('storage/' . $doctor->cv) }}" width="50%" height="600"></iframe>
-                            </div>
+                            @else
+                                {{-- <img src="{{ asset('storage/') }}" alt="immagine di default"> --}}
+                            @endif
                             <div class="form-group col-3 mt-4">
                                 <input type="file" class="form-control @error('cv') is-invalid @enderror" name="cv"
                                     id="cv">
