@@ -31,10 +31,10 @@ class SponsorController extends Controller
         $doctor = $user->doctor;
 
         //Recupero tutti i dati all'interno di sponsor
-        $sponsor = Sponsor::all();
+        $sponsors = Sponsor::all();
 
         // Restituisci la vista 'admin.sponsors.index' passando i dati alla vista
-        return view('admin.sponsors.index', compact('sponsor', 'user', 'user_id', 'doctor', 'doctors'));
+        return view('admin.sponsors.index', compact('sponsors', 'user', 'user_id', 'doctor', 'doctors'));
     }
 
     /**

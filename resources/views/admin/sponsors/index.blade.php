@@ -3,51 +3,69 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h2 class="my-4 text-secondary">Sponsorizza la tua pagina</h2>
-            <h6 class="my-4 text-dark"><em>Sponsorizzando il tuo profilo apparirai per primo nelle ricerche e ti
-                    permette di avere un bacino di utenza molto più ampio con conseguenti importanti vantaggi!</em></h6>
             <div class="container mt-5">
-                <div class="row justify-content-end">
-                    <a href="#" class="btn btn-primary mr-3">Dashboard</a>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="my-4 text-dark">Sponsorizza la tua pagina</h2>
+                    <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Torna alla Dashboard</a>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">Scegli un Abbonamento</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-body">
-                                    <div class="card-body">
-                                        @foreach ($sponsors as $sponsor)
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" type="radio" name="abbonamento"
-                                                    id="abbonamento{{ $sponsor->id }}" value="{{ $sponsor->id }}">
-                                                <label class="form-check-label" for="abbonamento{{ $sponsor->id }}">
-                                                    Abbonamento {{ $sponsor->name }} - {{ $sponsor->price }}
-                                                </label>
-                                                <a href="#" class="btn btn-info" data-toggle="collapse"
-                                                    data-target="#dettagliAbbonamento{{ $sponsor->id }}">Vedi dettagli</a>
-                                                <div class="collapse" id="dettagliAbbonamento{{ $sponsor->id }}">
-                                                    <div class="card card-body">
-                                                        <!-- Inserisci qui la descrizione e le informazioni sull'abbonamento -->
-                                                        Questo è l'abbonamento {{ $sponsor->name }} con un costo mensile di
-                                                        {{ $sponsor->price }}. Avrai la visibilità in evidenza per
-                                                        {{ $sponsor->duration }} ore. Pagamento non rimobrsabile.
-                                                    </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-5 text-dark text-center">
+                    <h6 class="my-4"><em>Sponsorizzando il tuo profilo apparirai per primo nelle ricerche e ti permette di
+                            avere un bacino di utenza molto più ampio con conseguenti importanti vantaggi!</em></h6>
+                    <img class="mt-3 justify-content-center" style="width: 400px"
+                        src="{{ asset('storage/credit-card.png') }}" alt="Immagine Sponsor Page">
+                </div>
+                <div class="col-md-7 align-items-center mt-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Scegli un Abbonamento</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{-- {{ route('sottoscrizione') }} --}}" method="POST">
+                                @csrf
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    @foreach ($sponsors as $sponsor)
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#flush-collapse{{ $sponsor->id }}"
+                                                    aria-expanded="false" aria-controls="flush-collapse{{ $sponsor->id }}">
+                                                    <input type="radio" name="selected_sponsor"
+                                                        value="{{ $sponsor->id }}"> Abbonamento {{ $sponsor->name }} - €
+                                                    {{ $sponsor->price }}
+                                                </button>
+                                            </h2>
+                                            <div id="flush-collapse{{ $sponsor->id }}" class="accordion-collapse collapse"
+                                                aria-labelledby="heading{{ $sponsor->id }}"
+                                                data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">Con l'abbonamento
+                                                    <strong><em>{{ $sponsor->name }}</em></strong>,
+                                                    usufruirai
+                                                    della posizione <em>"In evidenza"</em> nelle pagine di ricerca per
+                                                    <strong>{{ $sponsor->duration }} ore</strong>. Una volta che il
+                                                    pagamento è andato a buon fine potrai godere di questi vantaggi,
+                                                    incrementando la possibilità di essere contattato da nuovi pazienti.
+                                                    <small><em><strong>N.B. Pagamento
+                                                                NON rimborsabile.</strong></em></small>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <a href="#" class="btn btn-success">Vai al Pagamento</a>
-                            </div>
                         </div>
+                        <div class="mt-1 mb-3 text-center">
+                            <button type="submit" class="btn btn-success mx-auto w-50">
+                                <i class="fa-regular fa-credit-card fa-lg"></i> Sottoscrivi
+                            </button>
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 @endsection
