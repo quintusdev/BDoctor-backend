@@ -25,9 +25,9 @@
                             <h5><strong>Nome:</strong></h5>
                             <input class="form-control @error('name')is-invalid @enderror" type="text" name="name"
                                 id="name" placeholder="Nome" value="{{ old('name') ?? $user->name }}" required>
-                            {{-- @error('name')
+                            @error('name')
                                 <div class="text-danger">{{ $message }}</div>
-                            @enderror --}}
+                            @enderror
                         </div>
 
                         {{-- MODIFICA CAMPO COGNOME --}}
@@ -35,9 +35,9 @@
                             <h5><strong>Cognome:</strong></h5>
                             <input class="form-control @error('surname')is-invalid @enderror" type="text" name="surname"
                                 id="surname" placeholder="Cognome" value="{{ old('surname') ?? $user->surname }}" required>
-                            {{-- @error('surname')
+                            @error('surname')
                                 <div class="text-danger">{{ $message }}</div>
-                            @enderror --}}
+                            @enderror
                         </div>
 
                         <div class="form-group col-3 mt-4">
@@ -52,14 +52,14 @@
                         <div class="form-group col-6 mt-4">
                             <div>
                                 <h5><strong>Inserisci o aggiorna la tua immagine profilo:</strong></h5>
-                                <img src="{{ asset('storage/' . $doctor->picture) }}" width="500px">
-                                <caption>Immagine Profilo</caption>
+                                @if(isset($doctor->picture))
+                                    <img src="{{ asset('storage/' . $doctor->picture) }}" class="img_profile">
+                                @else
+                                    <img src="{{ asset('storage/profile_default.jpg') }}" alt="immagine di default" class="img_profile">
+                                @endif
                             </div>
                             <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture"
                                 id="picture">
-                            {{-- @error('picture')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror --}}
                         </div>
 
                         {{-- MODIFICA SPECIALIZZAZIONI --}}
@@ -70,27 +70,29 @@
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" role="switch"
                                             id="flexSwitchCheckDefault" name="specializations[]"
-                                            value="{{ $specialization->id }}" required
+                                            value="{{ $specialization->id }}"
                                             {{ in_array($specialization->id, old('specializations', $doctor->specializations->pluck('id')->toArray())) ? 'checked' : '' }}>
                                         <label class="form-check-label me-2" for="flexSwitchCheckDefault">
                                             {{ $specialization->name }}</label>
                                     </div>
                                 @endforeach
+                                @error('specializations')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- CARICAMENTO FILE CV --}}
                             <div>
                                 <h5><strong>Inserisci il tuo curriculum:</strong></h5>
                             </div>
-                            <div>
+                            @if(isset($doctor->cv))
                                 <iframe src="{{ asset('storage/' . $doctor->cv) }}" width="50%" height="600"></iframe>
-                            </div>
+                            @else
+                                {{-- <img src="{{ asset('storage/') }}" alt="immagine di default"> --}}
+                            @endif
                             <div class="form-group col-3 mt-4">
                                 <input type="file" class="form-control @error('cv') is-invalid @enderror" name="cv"
                                     id="cv">
-                                {{-- @error('picture')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror --}}
                             </div>
 
 

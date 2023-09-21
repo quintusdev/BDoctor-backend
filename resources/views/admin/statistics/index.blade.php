@@ -26,37 +26,54 @@
     </div>
     <script>
         const ctx = document.getElementById('myChart').getContext('2d');
-        const data = {
-            labels: {!! $labels !!}, // Utilizza i dati passati dalla vista
-            datasets: [{
-                label: 'Numero di Messaggi',
-                data: {!! $data !!},
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
+        const chartData = {!! json_encode($chartData) !!};
+
+        // Estrai i dati dai tuoi oggetti chartData
+        const labels = JSON.parse({!! json_encode($chartData['labels']) !!});
+        const messageData = JSON.parse({!! json_encode($chartData['messageData']) !!});
+        const reviewData = JSON.parse({!! json_encode($chartData['reviewData']) !!});
 
         const config = {
-        type: 'bar',
-        data: data,
-        options: {}
-    };
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                        label: 'Messaggi',
+                        data: messageData,
+                        fill: false,
+                        backgroundColor: 'rgba(255, 205, 86, 0.2)',
+                        borderColor: 'rgb(255, 205, 86)',
+                        borderWidth: 1,
+                        yAxisID: 'y', // Inverti l'asse, ora è l'asse y
+                    },
+                    {
+                        label: 'Recensioni',
+                        data: reviewData,
+                        fill: false,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        borderWidth: 1,
+                        yAxisID: 'y', // Inverti l'asse, ora è l'asse y
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        position: 'bottom',
+                        ticks: {
+                            stepSize: 1,
+                            precision: 0,
+                        },
+                    },
+                    y: {
+                        reverse: true, // Inverti l'asse y, ora mostra i mesi
+                    },
+                },
+            },
+        };
 
-    const myChart = new Chart(ctx, config);
+        const myChart = new Chart(ctx, config);
     </script>
 @endsection

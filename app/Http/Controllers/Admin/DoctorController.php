@@ -29,7 +29,7 @@ class DoctorController extends Controller
         $user = Auth::user();
 
         // Cerca il dottore associato all'utente corrente utilizzando l'ID utente
-        $doctors = Doctor::where('user_id', $user_id)->first();
+        $doctors = Doctor::where('user_id', $user_id);
 
         // Ottieni il dottore associato all'utente utilizzando la relazione definita nel modello User
         $doctor = $user->doctor;

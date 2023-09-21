@@ -24,7 +24,17 @@ class UpdateDoctorRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|max:50',
+            'surname' => 'required|max:50',
+            'specializations' => 'required|array|min:1',
+        ];
+    }
+
+    public function messages(){
+        return [
+            'name.required' => 'Il nome è obbligatorio',
+            'surname.required' => 'Il cognome è obbligatorio',
+            'specializations.required' => 'Seleziona almeno una specializzazione'
         ];
     }
 }
