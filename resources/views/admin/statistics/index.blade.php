@@ -7,7 +7,7 @@
                 <div class="col-12 mt-4 d-flex justify-content-between">
                     {{-- NOME UTENTE --}}
                     <div class="d-flex col-10 align-items-center mt-1">
-                        <h1>Benvenuto {{ $user->name }} {{ $user->surname }}</h1>
+                        <h1>{{ $user->name }}, queste sono le tue statistiche</h1>
                     </div>
                     {{-- BUTTON CHE RIPORTA ALLA DASHBOARD --}}
                     <div class="d-flex col-2 align-items-center mt-1">
@@ -17,13 +17,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-sm-8">
-                <div class="card">
-                    <canvas id="myChart" width="200" height="100"></canvas>
+            <div class="card mt-4">
+                {{-- INTESTAZIONE SCHEDA --}}
+                <div class="card-header mb-2"><strong>Statistiche messaggi e recensioni suddivisi per mese</strong></div>
+                <div class="col-12">
+                    <div class="card-body">
+                        {{-- VISUALIZZA IL GRAFICO --}}
+                        <canvas id="myChart" width="600" height="300"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    {{-- SCRIPT PER GRAFICO --}}
     <script>
         const ctx = document.getElementById('myChart').getContext('2d');
         const chartData = {!! json_encode($chartData) !!};
@@ -58,6 +64,7 @@
                 ],
             },
             options: {
+                indexAxis: 'y',
                 scales: {
                     x: {
                         beginAtZero: true,
