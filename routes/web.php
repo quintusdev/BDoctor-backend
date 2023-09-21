@@ -47,5 +47,4 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('statistics', StatisticController::class);
 });
 
-
 require __DIR__ . '/auth.php';

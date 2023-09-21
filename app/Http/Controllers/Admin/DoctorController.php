@@ -103,7 +103,12 @@ class DoctorController extends Controller
         // Cerca il dottore associato all'utente corrente utilizzando l'ID utente
         $doctors = Doctor::where('user_id', $user_id)->first();
 
-        return view('admin.doctors.edit', compact('specializations', 'doctor', 'doctors', 'user', 'user_id'));
+        if ($user->id == $doctor->user_id) {
+            return view('admin.doctors.edit', compact('specializations', 'doctor', 'doctors', 'user', 'user_id'));
+        } else {
+            // Reindirizza l'utente a una pagina di errore o effettua altre azioni necessarie
+            abort(403);
+        }
     }
 
     /**
