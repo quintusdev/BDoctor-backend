@@ -28,42 +28,52 @@
         const ctx = document.getElementById('myChart').getContext('2d');
         const chartData = {!! json_encode($chartData) !!};
 
+        // Estrai i dati dai tuoi oggetti chartData
+        const labels = JSON.parse({!! json_encode($chartData['labels']) !!});
+        const messageData = JSON.parse({!! json_encode($chartData['messageData']) !!});
+        const reviewData = JSON.parse({!! json_encode($chartData['reviewData']) !!});
+
         const config = {
             type: 'bar',
             data: {
-                labels: JSON.parse(chartData.labels),
-                datasets: [
-                    {
-                        label: 'Recensioni',
-                        data: JSON.parse(chartData.reviewData), // Dati delle recensioni
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
+                labels: labels,
+                datasets: [{
+                        label: 'Messaggi',
+                        data: messageData,
+                        fill: false,
+                        backgroundColor: 'rgba(255, 205, 86, 0.2)',
+                        borderColor: 'rgb(255, 205, 86)',
+                        borderWidth: 1,
+                        yAxisID: 'y', // Inverti l'asse, ora è l'asse y
                     },
                     {
-                        label: 'Messaggi',
-                        data: JSON.parse(chartData.messageData), // Dati dei messaggi
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }
-                ]
+                        label: 'Recensioni',
+                        data: reviewData,
+                        fill: false,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        borderWidth: 1,
+                        yAxisID: 'y', // Inverti l'asse, ora è l'asse y
+                    },
+                ],
             },
             options: {
                 scales: {
-                    y: {
+                    x: {
                         beginAtZero: true,
+                        position: 'bottom',
                         ticks: {
-                            stepSize: 1, // Imposta l'incremento dell'asse Y a 1 (solo numeri interi)
-                            precision: 0 // Imposta la precisione a 0 per avere solo numeri interi
-                        }
-                    }
-                }
+                            stepSize: 1,
+                            precision: 0,
+                        },
+                    },
+                    y: {
+                        reverse: true, // Inverti l'asse y, ora mostra i mesi
+                    },
+                },
             },
         };
 
         const myChart = new Chart(ctx, config);
-
-
     </script>
 @endsection
