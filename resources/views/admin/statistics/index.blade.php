@@ -26,37 +26,44 @@
     </div>
     <script>
         const ctx = document.getElementById('myChart').getContext('2d');
-        const data = {
-            labels: {!! $labels !!}, // Utilizza i dati passati dalla vista
-            datasets: [{
-                label: 'Numero di Messaggi',
-                data: {!! $data !!},
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
+        const chartData = {!! json_encode($chartData) !!};
 
         const config = {
-        type: 'bar',
-        data: data,
-        options: {}
-    };
+            type: 'bar',
+            data: {
+                labels: JSON.parse(chartData.labels),
+                datasets: [
+                    {
+                        label: 'Recensioni',
+                        data: JSON.parse(chartData.reviewData), // Dati delle recensioni
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Messaggi',
+                        data: JSON.parse(chartData.messageData), // Dati dei messaggi
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1, // Imposta l'incremento dell'asse Y a 1 (solo numeri interi)
+                            precision: 0 // Imposta la precisione a 0 per avere solo numeri interi
+                        }
+                    }
+                }
+            },
+        };
 
-    const myChart = new Chart(ctx, config);
+        const myChart = new Chart(ctx, config);
+
+
     </script>
 @endsection
