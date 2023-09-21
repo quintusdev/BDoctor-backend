@@ -42,8 +42,8 @@ class StatisticController extends Controller
         )
         ->where('user_id', $user_id) // Filtra i messaggi dell'utente autenticato
         ->groupBy('year', 'month')    // Raggruppa per anno e mese
-        ->orderBy('year', 'asc')      // Ordina per anno in ordine ascendente
-        ->orderBy('month', 'asc')     // Ordina per mese in ordine ascendente
+        ->orderBy('year', 'desc')      // Ordina per anno in ordine ascendente
+        ->orderBy('month', 'desc')     // Ordina per mese in ordine ascendente
         ->get();
 
         // Esegui una query per ottenere il conteggio delle recensioni per mese/anno dell'utente autenticato
@@ -54,8 +54,8 @@ class StatisticController extends Controller
         )
         ->where('doctor_id', $doctor_id->id) // Utilizza l'ID del dottore ottenuto dalla relazione
         ->groupBy('year', 'month')    // Raggruppa per anno e mese
-        ->orderBy('year', 'asc')      // Ordina per anno in ordine ascendente
-        ->orderBy('month', 'asc')     // Ordina per mese in ordine ascendente
+        ->orderBy('year', 'desc')      // Ordina per anno in ordine ascendente
+        ->orderBy('month', 'desc')     // Ordina per mese in ordine ascendente
         ->get();
 
         // Inizializza due array vuoti per le etichette e i dati del grafico
