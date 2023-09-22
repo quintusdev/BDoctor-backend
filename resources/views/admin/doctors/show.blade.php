@@ -16,31 +16,41 @@
                 </div>
 
                 {{-- IMMAGINE PROFILO UTENTE --}}
-                <div>
-                    @if(isset($doctor->picture))
+                <div class="col-12">
+                    @if (isset($doctor->picture))
                         <img src="{{ asset('storage/' . $doctor->picture) }}" class="img-profile">
                     @else
                         <img src="{{ asset('storage/profile_default.jpg') }}" alt="immagine di default" class="img-profile">
                     @endif
                 </div>
 
-                <div>
+                <div class="col-12">
                     <h4>Indirizzo: {{ $doctor->address }}</h4>
                 </div>
 
-                <div>
-                    @if(isset($doctor->cv))
+                <div class="col-12">
+                    <h4>Specializzazioni:</h4>
+                    <ul>
+                        @foreach ($doctor->specializations as $specialization)
+                            <li>{{ $specialization->name }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                <div class="col-12">
+                    <h4>Curriculum Vitae:</h4>
+                    @if (isset($doctor->cv))
                         <iframe src="{{ asset('storage/' . $doctor->cv) }}" width="50%" height="600"></iframe>
                     @else
                         {{-- <img src="{{ asset('storage/') }}" alt="immagine di default"> --}}
                     @endif
                 </div>
 
-                <div>
+                <div class="col-12">
                     <h4>N. telefono: {{ $doctor->phone }}</h4>
                 </div>
 
-                <div>
+                <div class="col-12">
                     <h4>Prestazioni: {{ $doctor->medical_service }}</h4>
                 </div>
             </div>
