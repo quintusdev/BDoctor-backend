@@ -31,7 +31,9 @@
                 <div class="col-12">
                     <h4>Specializzazioni:</h4>
                     <ul>
+                        {{-- PRENDO LE SPECIALIZZAZIONI LEGATE AL DOCTOR E CICLO LE INFORMAZIONI --}}
                         @foreach ($doctor->specializations as $specialization)
+                            {{-- Visualizzo in una lista tutti i valori selezionati dal medico --}}
                             <li>{{ $specialization->name }}</li>
                         @endforeach
                     </ul>
@@ -39,6 +41,7 @@
 
                 <div class="col-12">
                     <h4>Curriculum Vitae:</h4>
+                    {{-- Verifico che ci sia un file dentro la colonna cv associata al dottore autenticato --}}
                     @if (isset($doctor->cv))
                         <iframe src="{{ asset('storage/' . $doctor->cv) }}" width="50%" height="600"></iframe>
                     @else
