@@ -40,11 +40,12 @@ class StatisticController extends Controller
             DB::raw('MONTH(created_at) as month'),  // Estrai il mese dalla data di creazione
             DB::raw('COUNT(*) as count')           // Conta i messaggi
         )
-        ->where('user_id', $user_id) // Filtra i messaggi dell'utente autenticato
-        ->groupBy('year', 'month')    // Raggruppa per anno e mese
-        ->orderBy('year', 'desc')      // Ordina per anno in ordine ascendente
-        ->orderBy('month', 'desc')     // Ordina per mese in ordine ascendente
-        ->get();
+
+            ->where('user_id', $user_id) // Filtra i messaggi dell'utente autenticato
+            ->groupBy('year', 'month')    // Raggruppa per anno e mese
+            ->orderBy('year', 'desc')      // Ordina per anno in ordine ascendente
+            ->orderBy('month', 'desc')     // Ordina per mese in ordine ascendente
+            ->get();
 
         // Esegui una query per ottenere il conteggio delle recensioni per mese/anno dell'utente autenticato
         $reviewCounts = Review::select(
@@ -52,11 +53,13 @@ class StatisticController extends Controller
             DB::raw('MONTH(created_at) as month'),  // Estrai il mese dalla data di creazione
             DB::raw('COUNT(*) as count')           // Conta le recensioni
         )
-        ->where('doctor_id', $doctor_id->id) // Utilizza l'ID del dottore ottenuto dalla relazione
-        ->groupBy('year', 'month')    // Raggruppa per anno e mese
-        ->orderBy('year', 'desc')      // Ordina per anno in ordine ascendente
-        ->orderBy('month', 'desc')     // Ordina per mese in ordine ascendente
-        ->get();
+
+            ->where('doctor_id', $doctor_id->id) // Utilizza l'ID del dottore ottenuto dalla relazione
+            ->groupBy('year', 'month')    // Raggruppa per anno e mese
+            ->orderBy('year', 'desc')      // Ordina per anno in ordine ascendente
+            ->orderBy('month', 'desc')     // Ordina per mese in ordine ascendente
+            ->get();
+
 
         // Inizializza due array vuoti per le etichette e i dati del grafico
         $labels = []; // Conterrà le etichette per il grafico (formato: "mese/anno")
@@ -85,7 +88,7 @@ class StatisticController extends Controller
         ];
 
         return view('admin.statistics.index', compact('user', 'user_id', 'chartData'));
-        }
+    }
 
 
     /**
