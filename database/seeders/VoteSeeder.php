@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use Dotenv\Parser\Value;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Vote;
 
 class VoteSeeder extends Seeder
@@ -17,7 +15,14 @@ class VoteSeeder extends Seeder
      */
     public function run()
     {
+        // Cancella tutti i record esistenti
+        DB::table('votes')->delete();
+
+        // Ripristina l'ID autoincrementante a 1
+        DB::statement("ALTER TABLE votes AUTO_INCREMENT = 1;");
+
         $votes = [
+            ['value' => NULL],
             ['value' => 1],
             ['value' => 2],
             ['value' => 3],
