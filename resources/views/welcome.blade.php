@@ -11,6 +11,6 @@
 </div>
 
 <div class="content text-center">
-    <img src="https://static.italiaoggi.it/content_upload/img/2335/59/2335590/medici-387052.jpg" alt="Medici" style="width: 600px">
+    <img src="https://static.italiaoggi.it/content_upload/img/2335/59/2335590/medici-387052.jpg" alt="Medici" style="width: 600px" class="rounded-5">
 </div>
 @endsection
