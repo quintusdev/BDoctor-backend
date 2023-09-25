@@ -94,6 +94,20 @@ class SponsorController extends Controller
 
         if ($result->success) {
             // La simulazione di pagamento è andata a buon fine
+            // Acquista l'abbonamento
+            $doctor = Auth::user()->doctor; // Assume che l'utente autenticato sia un dottore
+            $doctorId = $doctor->id;
+            $sponsorId = $selectedSponsorId;
+            $durationInHours = $selectedSponsor->duration;
+            $expireDate = now()->addHours($durationInHours);
+
+            // Eseguo una query diretta per inserire i dati nella tabella ponte
+            \DB::table('sponsor_doctor')->insert([
+                'sponsor_id' => $sponsorId,
+                'doctor_id' => $doctorId,
+                'expire_date' => $expireDate,
+            ]);
+
             // Salva i dati nella sessione
             session(['product_name' => $product_name, 'product_price' => $product_price]);
             return view('admin.sponsors.payment-success', compact('product_name', 'product_price'));
