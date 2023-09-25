@@ -11,7 +11,7 @@ class DoctorController extends Controller
 {
     public function index()
     {
-        $doctors = Doctor::with('user', 'specializations')->get();
+        $doctors = Doctor::with('user', 'specializations', 'votes')->get();
 
         return response()->json([
             'success' => true,
@@ -30,10 +30,12 @@ class DoctorController extends Controller
 
         // Ora puoi ottenere le specializzazioni associate a questo dottore
         $specializations = $doctor->specializations;
+        $votes = $doctor->votes->vote;
 
         return response()->json([
             'success' => true,
             'results' => $specializations,
+            $votes,
         ]);
     }
 
@@ -42,9 +44,10 @@ class DoctorController extends Controller
     // Ottieni i parametri di ricerca dal modulo
     $name = $request->input('name');
     $specialization = $request->input('specialization');
+    $vote = $request->input('votes');
 
     // Esegui la ricerca utilizzando i parametri
-    $doctors = Doctor::with('user', 'specializations')
+    $doctors = Doctor::with('user', 'specializations', 'votes')
     ->when($name, function ($query) use ($name) {
         $query->whereHas('user', function ($subquery) use ($name) {
             $subquery->where('name', 'like', '%' . $name . '%');
@@ -55,6 +58,12 @@ class DoctorController extends Controller
             $subquery->where('name', $specialization);
         });
     })
+    ->when($vote, function ($query) use ($vote) {
+        $query->whereHas('votes', function ($subquery) use ($vote) {
+            $subquery->where('name', $vote);
+        });
+    })
+
     ->get();
 
 

@@ -38,6 +38,6 @@ class Doctor extends Model
     /* relazione many to many alla tabella votes */
     public function votes(): BelongsToMany
     {
-        return $this->belongsToMany(Vote::class);
+        return $this->belongsToMany(Vote::class, 'vote_doctor');
     }
 }
