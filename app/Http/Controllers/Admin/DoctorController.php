@@ -151,7 +151,6 @@ class DoctorController extends Controller
             'slug' => $slug
         ]);
     
-
         // Verifica se è stata inviata una nuova immagine tramite il modulo
         if ($request->hasFile('picture')) {
             // Se il dottore ha già una foto associata, elimina la vecchia foto dallo storage
