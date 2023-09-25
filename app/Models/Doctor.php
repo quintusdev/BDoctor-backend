@@ -13,7 +13,7 @@ class Doctor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'address', 'cv', 'picture', 'phone', 'medical_service'];
+    protected $fillable = ['user_id', 'address', 'cv', 'picture', 'phone', 'medical_service', 'avr_vote'];
 
     /* relazione one to one con la tabella user */
     public function user(): BelongsTo
