@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/doctors', [DoctorController::class, 'index']);
+Route::get('/doctors/search', [DoctorController::class, 'search']);
 Route::get('/doctors/{doctor_id}/specializations', [DoctorController::class, 'getSpecializations']);
