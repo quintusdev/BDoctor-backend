@@ -77,7 +77,7 @@
                                                                 height="300" viewBox="0 0 512 512" width="300">
                                                                 <image x="0" y="0" width="100%"
                                                                     height="100%"
-                                                                    xlink:href="{{ asset('storage/analitycs.png') }}" />
+                                                                    xlink:href="{{ asset('storage/rating.png') }}" />
                                                             </svg>
                                                         </div>
                                                         <div class="solu_title">
@@ -102,7 +102,7 @@
                                                                 height="300" viewBox="0 0 512 512" width="300">
                                                                 <image x="0" y="0" width="100%"
                                                                     height="100%"
-                                                                    xlink:href="{{ asset('storage/rating.png') }}" />
+                                                                    xlink:href="{{ asset('storage/analitycs.png') }}" />
                                                             </svg>
                                                         </div>
                                                         <div class="solu_title">

@@ -8,6 +8,7 @@ use App\Models\Doctor;
 use App\Models\User;
 use App\Models\Specialization;
 use App\Models\Sponsor;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreDoctorRequest;
@@ -122,26 +123,34 @@ class DoctorController extends Controller
     {
         // Ottieni l'ID dell'utente attualmente autenticato
         $user_id = Auth::id();
-
+    
         // Trova un utente nel database utilizzando l'ID specifico dell'utente
         $userDetail = User::findOrFail($user_id);
-
+    
         // Ottieni tutte le specializzazioni dal database
         $specializations = Specialization::all();
-
+    
         // Ottieni tutti i dati inviati tramite il modulo HTTP (i dati del form)
         $form_data = $request->all();
-
+    
         // Otteniamo il dottore associato all'utente corrente
         $doctor = $userDetail->doctor;
-
-        // Aggiungo il campo 'phone' ai dati del modulo
-        $form_data['phone'] = $request->input('phone');
-
+        
+        // Aggiorna il nome e il cognome dell'utente
         $userDetail->update([
             'name' => $request->input('name'),
             'surname' => $request->input('surname'),
+            'phone' => $request->input('phone')
         ]);
+        
+        // Calcola lo slug basato sul nome e cognome forniti nel modulo
+        $slug = Str::slug($request->input('name') . ' ' . $request->input('surname'), '-');
+
+        // Aggiorna lo slug nell'utente
+        $userDetail->update([
+            'slug' => $slug
+        ]);
+    
 
         // Verifica se è stata inviata una nuova immagine tramite il modulo
         if ($request->hasFile('picture')) {
@@ -149,36 +158,37 @@ class DoctorController extends Controller
             if ($doctor->picture) {
                 Storage::delete($doctor->picture);
             }
-
+    
             // Salva la nuova immagine nello storage e ottieni il percorso
             $path = Storage::put('doctor_picture', $request->picture);
-
+    
             // Aggiorna il campo 'picture' nei dati del modulo con il nuovo percorso dell'immagine
             $form_data['picture'] = $path;
         }
-
+    
         if ($request->hasFile('cv')) {
             // Se il dottore ha già un file associato, elimina il vecchio file dallo storage
             if ($doctor->cv) {
                 Storage::delete($doctor->cv);
             }
-
+    
             // Salvo il nuovo file nello storage e ottieni il percorso
             $path = Storage::put('doctor_cv', $request->cv);
-
+    
             // Aggiorna il campo 'cv' nei dati del modulo con il nuovo percorso del file
             $form_data['cv'] = $path;
         }
-
+    
         // Altri aggiornamenti del modello Doctor se necessario
         $doctor->update($form_data);
-
+    
         if ($request->has('specializations')) {
             $doctor->specializations()->sync($request->specializations);
         }
-
+    
         return redirect()->route('admin.doctors.show', ['doctor' => $doctor]);
     }
+
 
     /**
      * Remove the specified resource from storage.
