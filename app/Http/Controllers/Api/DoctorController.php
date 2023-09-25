@@ -79,4 +79,20 @@ class DoctorController extends Controller
             'results' => $doctors,
         ]);
     }
+
+    public function show($doctor_id)
+    {
+        // Utilizza $doctor_id per recuperare il dottore con i dati dell'utente associato
+        $doctor = Doctor::with('user')->find($doctor_id);
+
+        if (!$doctor) {
+            // Gestisci il caso in cui il dottore non sia stato trovato (ad esempio, restituisci un errore 404)
+            return response()->json(['error' => 'Dottore non trovato'], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'results' => $doctor,
+        ]);
+    }
 }
