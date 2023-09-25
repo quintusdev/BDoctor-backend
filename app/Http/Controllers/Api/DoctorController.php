@@ -42,7 +42,7 @@ class DoctorController extends Controller
     // Ottieni i parametri di ricerca dal modulo
     $name = $request->input('name');
     $specialization = $request->input('specialization');
-    $vote = $request->input('votes');
+    $avrVote = $request->input('avr_vote');
     $review = $request->input('reviews');
 
     // Esegui la ricerca utilizzando i parametri
@@ -57,10 +57,8 @@ class DoctorController extends Controller
             $subquery->where('name', $specialization);
         });
     })
-    ->when($vote, function ($query) use ($vote) {
-        $query->whereHas('votes', function ($subquery) use ($vote) {
-            $subquery->where('name', $vote);
-        });
+    ->when($avrVote, function ($query) use ($avrVote) {
+        $query->where('avr_vote', $avrVote);
     })
 
     ->when($review, function ($query) use ($review) {
