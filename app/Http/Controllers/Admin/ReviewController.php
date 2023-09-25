@@ -8,6 +8,8 @@ use App\Models\Review;
 use App\Models\Doctor;
 use App\Http\Requests\StoreReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
+use Illuminate\Support\Facades\DB;
+use App\Models\Vote;
 
 class ReviewController extends Controller
 {
@@ -17,21 +19,23 @@ class ReviewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        // Ottieni l'oggetto dell'utente attualmente autenticato
-        $user = Auth::user();
+{
+    // Ottieni l'oggetto dell'utente attualmente autenticato
+    $user = Auth::user();
 
-        // Ottieni l'oggetto del medico associato all'utente autenticato
-        $doctor = $user->doctor;
+    // Ottieni l'oggetto del medico associato all'utente autenticato
+    $doctor = $user->doctor;
 
-        // Assicurati che il medico esista prima di cercare le recensioni
-        if ($doctor) {
-            // Ottieni solo le recensioni associate al medico
-            $reviews = $doctor->reviews;
-        }
-
-        return view('admin.reviews.index', compact('user', 'reviews', 'doctor'));
+    // Assicurati che il medico esista prima di cercare le recensioni
+    if ($doctor) {
+        // Ottieni solo le recensioni associate al medico
+        $reviews = $doctor->reviews()->with(['votes' => function ($query) use ($doctor) {
+            $query->where('doctor_id', $doctor->id);
+        }])->get();
     }
+
+    return view('admin.reviews.index', compact('user', 'reviews', 'doctor')); 
+}
 
 
     /**

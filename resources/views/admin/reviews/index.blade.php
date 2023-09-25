@@ -21,6 +21,16 @@
                             <div class="card mt-4">
                                 <div class="card-body">
                                     <div class="card-content text-center">
+                                        @foreach ($review->votes as $vote)
+                                            <div class="mt-3">
+                                                @for ($i = 0; $i < $vote->value; $i++)
+                                                    <i class="fas fa-star"></i>
+                                                @endfor
+                                                @for ($i = $vote->value; $i < 5; $i++)
+                                                    <i class="far fa-star"></i>
+                                                @endfor
+                                            </div>
+                                        @endforeach
                                         <h4>{{ $review->name }} {{ $review->surname }}</h4>
                                         <h5 class="mb-4">{{ $review->email }}</h5>
                                         <a href="{{ route('admin.reviews.show', $review->id) }}"
@@ -30,7 +40,9 @@
                             </div>
                         </div>
                     @endforeach
+                    
                 </div>
+                
             </div>
         </div>
     </div>
