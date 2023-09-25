@@ -74,6 +74,17 @@
         const radioButtons = document.querySelectorAll('.sponsor-option');
         const productNameInput = document.querySelector('#product_name');
         const productPriceInput = document.querySelector('#product_price');
+        const subscribeButton = document.querySelector('button[type="submit"]');
+
+        // Funzione per abilitare/disabilitare il pulsante "Sottoscrivi"
+        function updateSubscribeButton() {
+            const selectedRadio = document.querySelector('input[name="selected_sponsor"]:checked');
+            if (selectedRadio) {
+                subscribeButton.disabled = false;
+            } else {
+                subscribeButton.disabled = true;
+            }
+        }
     
         radioButtons.forEach(radioButton => {
             radioButton.addEventListener('change', function() {
@@ -84,8 +95,13 @@
                     if (matches) {
                         productNameInput.value = matches[1];
                         productPriceInput.value = matches[2];
+                    }
                 }
+                // Aggiorna lo stato del pulsante "Sottoscrivi"
+                updateSubscribeButton();
             });
         });
+        // Inizialmente disabilita il pulsante "Sottoscrivi"
+        updateSubscribeButton();
     </script>
 @endsection
