@@ -135,7 +135,6 @@ class DoctorController extends Controller
     
         // Otteniamo il dottore associato all'utente corrente
         $doctor = $userDetail->doctor;
-
         
         // Aggiorna il nome e il cognome dell'utente
         $userDetail->update([

@@ -8,6 +8,8 @@ use App\Models\Doctor;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreSponsorRequest;
 use App\Http\Requests\UpdateSponsorRequest;
+use Braintree\Gateway;
+use Braintree\Transaction;
 
 class SponsorController extends Controller
 {
@@ -16,6 +18,95 @@ class SponsorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     private function getProductDetails($selectedSponsorId)
+     {
+         $selectedSponsor = Sponsor::find($selectedSponsorId);
+     
+         if (!$selectedSponsor) {
+             // Gestisci l'ID non trovato
+         }
+     
+         $product_name = $selectedSponsor->name;
+         $product_price = $selectedSponsor->price;
+     
+         return [
+             'product_name' => $product_name,
+             'product_price' => $product_price,
+         ];
+     }
+
+    public function simulatePayment(StoreSponsorRequest $request)
+    {   
+        // Inizializza la tua configurazione di Braintree
+        $gateway = new Gateway([
+            'environment' => config('services.braintree.environment'),
+            'merchantId' => config('services.braintree.merchant_id'),
+            'publicKey' => config('services.braintree.public_key'),
+            'privateKey' => config('services.braintree.private_key'),
+        ]);
+
+
+        // Genera un token di pagamento di test
+        $clientToken = $gateway->clientToken()->generate();
+
+        $selectedSponsorId = $request->input('selected_sponsor');
+
+        $productDetails = $this->getProductDetails($selectedSponsorId);
+
+        $product_name = $productDetails['product_name'];
+        $product_price = $productDetails['product_price'];
+
+        return view('admin.sponsors.simulate-payment', compact('clientToken', 'selectedSponsorId', 'productDetails', 'product_name', 'product_price'));
+    }
+
+    public function handleSimulatedPayment(StoreSponsorRequest $request)
+    {   
+        $gateway = new Gateway([
+            'environment' => config('services.braintree.environment'),
+            'merchantId' => config('services.braintree.merchant_id'),
+            'publicKey' => config('services.braintree.public_key'),
+            'privateKey' => config('services.braintree.private_key'),
+        ]);
+
+        // Ottieni i dati inviati dal modulo di pagamento
+        $paymentData = $request->only(['payment_method_nonce']);
+        $product_name = $request->input('product_name');
+        $product_price = $request->input('product_price');
+
+        $selectedSponsorId = $request->input('selected_sponsor');
+
+        $selectedSponsor = Sponsor::find($selectedSponsorId);
+
+        if (!$selectedSponsor) {
+            // Gestisci l'ID non trovato
+        }
+
+        // Effettua la simulazione della transazione
+        $result = $gateway->transaction()->sale([
+            'amount' =>$selectedSponsor->price,
+            'paymentMethodNonce' => $paymentData['payment_method_nonce'],
+            'options' => [
+                'submitForSettlement' => true, // Completa la simulazione come una transazione reale
+            ],
+        ]);
+
+
+        if ($result->success) {
+            // La simulazione di pagamento è andata a buon fine
+            // Salva i dati nella sessione
+            session(['product_name' => $product_name, 'product_price' => $product_price]);
+            return view('admin.sponsors.payment-success', compact('product_name', 'product_price'));
+        } else {
+            // La simulazione di pagamento ha fallito
+            // Gestisci l'errore e mostra un messaggio all'utente
+            //codice per genereare clientToken
+            $clientToken = $gateway->clientToken()->generate();
+            $errors = ["pagamento rifiutato"];
+            return view('admin.sponsors.simulate-payment', compact('clientToken', 'selectedSponsorId', 'product_name', 'product_price'))->withErrors(['payment'=>'pagamento rifiutato']);
+        }
+    }
+
     public function index()
     {
         // Ottieni l'ID dell'utente attualmente autenticato
