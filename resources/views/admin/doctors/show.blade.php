@@ -16,31 +16,44 @@
                 </div>
 
                 {{-- IMMAGINE PROFILO UTENTE --}}
-                <div>
-                    @if(isset($doctor->picture))
+                <div class="col-12">
+                    @if (isset($doctor->picture))
                         <img src="{{ asset('storage/' . $doctor->picture) }}" class="img-profile">
                     @else
                         <img src="{{ asset('storage/profile_default.jpg') }}" alt="immagine di default" class="img-profile">
                     @endif
                 </div>
 
-                <div>
+                <div class="col-12">
                     <h4>Indirizzo: {{ $doctor->address }}</h4>
                 </div>
 
-                <div>
-                    @if(isset($doctor->cv))
+                <div class="col-12">
+                    <h4>Specializzazioni:</h4>
+                    <ul>
+                        {{-- PRENDO LE SPECIALIZZAZIONI LEGATE AL DOCTOR E CICLO LE INFORMAZIONI --}}
+                        @foreach ($doctor->specializations as $specialization)
+                            {{-- Visualizzo in una lista tutti i valori selezionati dal medico --}}
+                            <li>{{ $specialization->name }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                <div class="col-12">
+                    <h4>Curriculum Vitae:</h4>
+                    {{-- Verifico che ci sia un file dentro la colonna cv associata al dottore autenticato --}}
+                    @if (isset($doctor->cv))
                         <iframe src="{{ asset('storage/' . $doctor->cv) }}" width="50%" height="600"></iframe>
                     @else
                         {{-- <img src="{{ asset('storage/') }}" alt="immagine di default"> --}}
                     @endif
                 </div>
 
-                <div>
+                <div class="col-12">
                     <h4>N. telefono: {{ $doctor->phone }}</h4>
                 </div>
 
-                <div>
+                <div class="col-12">
                     <h4>Prestazioni: {{ $doctor->medical_service }}</h4>
                 </div>
             </div>
