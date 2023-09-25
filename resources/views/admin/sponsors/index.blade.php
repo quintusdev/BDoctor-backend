@@ -22,7 +22,7 @@
                             <h5 class="card-title">Scegli un Abbonamento</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{-- {{ route('sottoscrizione') }} --}}" method="POST">
+                            <form action="{{ route('admin.sponsors.simulate-payment') }}" method="POST">
                                 @csrf
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
                                     @foreach ($sponsors as $sponsor)
@@ -32,8 +32,7 @@
                                                     data-bs-toggle="collapse"
                                                     data-bs-target="#flush-collapse{{ $sponsor->id }}"
                                                     aria-expanded="false" aria-controls="flush-collapse{{ $sponsor->id }}">
-                                                    <input type="radio" name="selected_sponsor"
-                                                        value="{{ $sponsor->id }}"> Abbonamento {{ $sponsor->name }} - €
+                                                    <input type="radio" name="selected_sponsor" class="sponsor-option" value="{{ $sponsor->id }}" > Abbonamento {{ $sponsor->name }} - €
                                                     {{ $sponsor->price }}
                                                 </button>
                                             </h2>
@@ -54,18 +53,39 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                {{-- input nascosti per il nome e il prezzo del prodotto --}}
+                                <input type="hidden" name="product_name" id="product_name" value="">
+                                <input type="hidden" name="product_price" id="product_price" value="">
+                                <div class="mt-1 mb-3 text-center">
+                                    <button type="submit" class="btn btn-success mx-auto w-50">
+                                        <i class="fa-regular fa-credit-card fa-lg"></i> Sottoscrivi
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="mt-1 mb-3 text-center">
-                            <button type="submit" class="btn btn-success mx-auto w-50">
-                                <i class="fa-regular fa-credit-card fa-lg"></i> Sottoscrivi
-                            </button>
-                        </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
+    <script>
+        // Ascolta il cambio nell'input radio
+        const radioButtons = document.querySelectorAll('.sponsor-option');
+        const productNameInput = document.querySelector('#product_name');
+        const productPriceInput = document.querySelector('#product_price');
+    
+        radioButtons.forEach(radioButton => {
+            radioButton.addEventListener('change', function() {
+                if (this.checked) {
+                    // Estrai il nome e il prezzo dalla stringa dell'opzione selezionata
+                    const optionText = this.parentElement.textContent.trim();
+                    const matches = optionText.match(/Abbonamento (.+) - €(.+)/);
+                    if (matches) {
+                        productNameInput.value = matches[1];
+                        productPriceInput.value = matches[2];
+                }
+            });
+        });
+    </script>
 @endsection

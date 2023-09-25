@@ -45,6 +45,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('sponsors', SponsorController::class);
     Route::resource('specializations', SpecializationController::class);
     Route::resource('statistics', StatisticController::class);
+    Route::match(['post'], '/sponsors/simulate-payment', [SponsorController::class, 'simulatePayment'])->name('sponsors.simulate-payment');
+    Route::match(['post'], '/sponsors/handle-payment', [SponsorController::class, 'handleSimulatedPayment'])->name('sponsors.handle-payment');
 });
 
 
