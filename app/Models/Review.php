@@ -17,9 +17,4 @@ class Review extends Model
     {
         return $this->BelongsTo(Doctor::class);
     }
-    public function votes()
-    {
-        return $this->belongsToMany(Vote::class, 'vote_doctor', 'review_id', 'vote_id')
-                    ->withPivot('doctor_id');
-    }
 }
