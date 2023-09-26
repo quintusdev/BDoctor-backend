@@ -22,7 +22,6 @@ class VoteSeeder extends Seeder
         DB::statement("ALTER TABLE votes AUTO_INCREMENT = 1;");
 
         $votes = [
-            ['value' => NULL],
             ['value' => 1],
             ['value' => 2],
             ['value' => 3],

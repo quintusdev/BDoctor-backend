@@ -11,7 +11,7 @@ class SponsorController extends Controller
     public function index()
     {
         // Esegui una query per ottenere tutti i dati dalla tabella ponte "sponsor_doctor"
-        $sponsorDoctorData = \DB::table('sponsor_doctor')->get();
+        $sponsorDoctorData = DB::table('sponsor_doctor')->get();
 
         // Restituisci i dati come risposta JSON
         return response()->json($sponsorDoctorData);
