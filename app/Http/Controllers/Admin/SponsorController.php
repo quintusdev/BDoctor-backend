@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Sponsor;
 use App\Models\Doctor;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreSponsorRequest;
 use App\Http\Requests\UpdateSponsorRequest;
 use Braintree\Gateway;
