@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\DoctorController;
+use App\Http\Controllers\Api\VoteController;
+use App\Http\Controllers\Api\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +27,5 @@ Route::get('/doctors/search', [DoctorController::class, 'search']);
 Route::get('/doctors/{doctor_id}/specializations', [DoctorController::class, 'getSpecializations']);
 Route::get('/sponsor-doctor', [App\Http\Controllers\Api\SponsorController::class, 'index']);
 Route::get('/doctors/{doctor_id}', [DoctorController::class, 'show']);
-
+Route::post('/doctors/reviews', [DoctorController::class, 'newReview']);
+Route::post('/votes', [VoteController::class, 'create']);
