@@ -24,3 +24,5 @@ Route::get('/doctors', [DoctorController::class, 'index']);
 Route::get('/doctors/search', [DoctorController::class, 'search']);
 Route::get('/doctors/{doctor_id}/specializations', [DoctorController::class, 'getSpecializations']);
 Route::get('/sponsor-doctor', [App\Http\Controllers\Api\SponsorController::class, 'index']);
+Route::get('/doctors/{doctor_id}', [DoctorController::class, 'show']);
+
