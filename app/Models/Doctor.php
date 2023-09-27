@@ -40,4 +40,9 @@ class Doctor extends Model
     {
         return $this->belongsToMany(Vote::class, 'vote_doctor');
     }
+    public function getPicturePathAttribute()
+    {
+        return 'images/' . $this->attributes['picture'];
+    }
+
 }
