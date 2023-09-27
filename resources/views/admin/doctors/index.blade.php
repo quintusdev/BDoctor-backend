@@ -7,10 +7,12 @@
             <div class="col-12 d-flex justify-content-start">
                 {{-- SCHEDA PROFILO PROFESSIONISTA --}}
                 <div class="bg-white rounded-5 text-left d-flex align-items-center p-1">
-                    {{-- IMMAGINE PROFILO PROFESSIONISTA --}}
+                    {{-- IMMAGINE PROFILO PROFESSIONISTA 
                     <img class="rounded-5 m-4" src="{{ asset('storage/doctor-profile2.png') }}" alt="immagine profilo dottore"
-                        style="width: 300px">
-                    <div class="m-3 justify-content-center p-4">
+                        style="width: 300px">--}}
+                        <img class="rounded-5 m-4" src="{{ asset('storage/'.$doctor->picture ?? 'storage/doctor-profile2.png') }}" alt="immagine profilo dottore" style="width: 300px">
+                        <div class="m-3 justify-content-center p-4">
+                            
                         {{-- NOME E COGNOME PROFESSIONISTA --}}
                         <h3>{{ $user->name }} {{ $user->surname }}</h3>
                         {{-- SEZIONE NUMERO TELEFONO --}}
