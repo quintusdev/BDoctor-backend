@@ -57,8 +57,32 @@ class DoctorController extends Controller
      */
     public function store(StoreDoctorRequest $request)
     {
-        //
+        // Valida il file dell'immagine
+        $request->validate([
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        // Carica l'immagine
+        $imageName = time().'.'.$request->picture->extension();  
+        $request->picture->storeAs('doctor_picture', $imageName, 'public');
+    
+        // Crea un nuovo oggetto Doctor
+        $doctor = new Doctor;
+    
+        // Imposta le proprietà dell'oggetto Doctor
+        $doctor->name = $request->name;
+        $doctor->email = $request->email;
+        $doctor->picture = 'doctor_picture/'.$imageName;
+    
+        // Salva l'oggetto Doctor nel database
+        $doctor->save();
+    
+        // Reindirizza l'utente a una pagina di successo o effettua altre azioni necessarie
+        return back()
+            ->with('success','Hai caricato con successo l\'immagine.')
+            ->with('image',$imageName);
     }
+    
 
     /**
      * Display the specified resource.
@@ -82,6 +106,9 @@ class DoctorController extends Controller
 
         // Trova un medico nel database utilizzando l'ID specifico del medico
         $doctor = Doctor::find($doctor->id);
+
+        // Aggiungi l'URL dell'immagine del profilo alla risposta
+        $doctor->image_url = Storage::url($doctor->picture);
 
         return view('admin.doctors.show', compact('doctor', 'doctors', 'user', 'user_id'));
     }
@@ -121,59 +148,30 @@ class DoctorController extends Controller
      */
     public function update(UpdateDoctorRequest $request, Doctor $doctor)
     {
-        // Ottieni l'ID dell'utente attualmente autenticato
-        $user_id = Auth::id();
-    
-        // Trova un utente nel database utilizzando l'ID specifico dell'utente
-        $userDetail = User::findOrFail($user_id);
-    
-        // Ottieni tutte le specializzazioni dal database
-        $specializations = Specialization::all();
-    
-        // Ottieni tutti i dati inviati tramite il modulo HTTP (i dati del form)
-        $form_data = $request->all();
-    
-        // Otteniamo il dottore associato all'utente corrente
-        $doctor = $userDetail->doctor;
-        
-        // Aggiorna il nome e il cognome dell'utente
-        $userDetail->update([
-            'name' => $request->input('name'),
-            'surname' => $request->input('surname'),
-            'phone' => $request->input('phone')
-        ]);
-        
-        // Calcola lo slug basato sul nome e cognome forniti nel modulo
-        $slug = Str::slug($request->input('name') . ' ' . $request->input('surname'), '-');
-
-        // Aggiorna lo slug nell'utente
-        $userDetail->update([
-            'slug' => $slug
-        ]);
-    
-        // Verifica se è stata inviata una nuova immagine tramite il modulo
+        // ...
+        // Se è stata inviata una nuova immagine tramite il modulo
         if ($request->hasFile('picture')) {
             // Se il dottore ha già una foto associata, elimina la vecchia foto dallo storage
             if ($doctor->picture) {
                 Storage::delete($doctor->picture);
             }
-    
+
             // Salva la nuova immagine nello storage e ottieni il percorso
-            $path = Storage::put('doctor_picture', $request->picture);
-    
+            $path = $request->picture->store('doctor_picture', 'public');
+
             // Aggiorna il campo 'picture' nei dati del modulo con il nuovo percorso dell'immagine
             $form_data['picture'] = $path;
         }
-    
+
         if ($request->hasFile('cv')) {
             // Se il dottore ha già un file associato, elimina il vecchio file dallo storage
             if ($doctor->cv) {
                 Storage::delete($doctor->cv);
             }
-    
+
             // Salvo il nuovo file nello storage e ottieni il percorso
-            $path = Storage::put('doctor_cv', $request->cv);
-    
+            $path = $request->cv->store('doctor_cv', 'public');
+
             // Aggiorna il campo 'cv' nei dati del modulo con il nuovo percorso del file
             $form_data['cv'] = $path;
         }
