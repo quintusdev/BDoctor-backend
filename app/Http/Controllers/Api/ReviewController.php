@@ -12,13 +12,13 @@ class ReviewController extends Controller
 
     public function store(Request $request)
     {
-        // Valida i dati della richiesta, se necessario
-        $request->validate([
+        // Valida i dati della richiesta
+        $validatedData = $request->validate([
             'doctor_id' => 'required',
-            'text' => 'required',
             'name' => 'required',
             'surname' => 'required',
             'email' => 'required|email',
+            'text' => 'required',
         ]);
 
         // Crea una nuova recensione utilizzando il modello
