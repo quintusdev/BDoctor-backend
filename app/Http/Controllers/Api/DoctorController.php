@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Doctor;
 use App\Models\Review;
@@ -93,5 +94,18 @@ class DoctorController extends Controller
             'success' => true,
             'results' => $doctor,
         ]);
+    }
+
+    public function getDoctorsWithAverageVotes()
+    {
+        $doctors = Doctor::with('votes')->get();
+
+        // Calcola la media dei voti per ciascun dottore
+        $doctors->each(function ($doctor) {
+            $averageVote = $doctor->votes->avg('vote');
+            $doctor->average_vote = $averageVote;
+        });
+
+        return response()->json(['doctors' => $doctors]);
     }
 }

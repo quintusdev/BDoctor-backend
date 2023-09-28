@@ -30,3 +30,4 @@ Route::get('/doctors/{doctor_id}', [DoctorController::class, 'show']);
 Route::post('/reviews', [App\Http\Controllers\Api\ReviewController::class, 'store']);
 Route::post('/messages', [App\Http\Controllers\Api\MessageController::class, 'store']);
 Route::post('/vote', [App\Http\Controllers\Api\VoteController::class, 'store']);
+Route::get('/average_votes/{doctorId}', [App\Http\Controllers\Api\DoctorController::class, 'getAverageVotes']);
