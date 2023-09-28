@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vote;
 use App\Models\Doctor;
+use Illuminate\Validation\ValidationException;
 
 class VoteController extends Controller
 {
@@ -14,9 +15,9 @@ class VoteController extends Controller
         // Valida i dati inviati dalla richiesta
         $request->validate([
             'doctor_id' => 'required|exists:doctors,id',
-            'name' => 'required',
-            'surname' => 'required',
-            'email' => 'required|email',
+            'rname' => 'required',
+            'rsurname' => 'required',
+            'remail' => 'required|email',
             'vote_id' => 'required|integer|between:1,5',
         ]);
 

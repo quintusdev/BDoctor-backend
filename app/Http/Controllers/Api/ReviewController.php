@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Doctor;
-use App\Models\Vote;
 use Illuminate\Validation\ValidationException;
 use App\Models\vote_doctor;
 
