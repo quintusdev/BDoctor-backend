@@ -23,12 +23,14 @@
                                     <div class="card-content text-center">
                                         <h4>Utente: {{ $review->name }} {{ $review->surname }}</h4>
                                         <h5 class="mb-4">E-mail: {{ $review->email }}</h5>
+                                        <hr>
+                                        <h6><strong>{{ $review->text }}</strong></h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
     </div>
