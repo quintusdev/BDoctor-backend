@@ -15,13 +15,12 @@ class SponsorController extends Controller
     {
         $data_attuale = date('Y-m-d');
 
-        // Esegui una query per ottenere i dati desiderati dalle tabelle utilizzando un'unione (join) corretta
         $sponsorDoctorData = DB::table('sponsor_doctor')
             ->join('doctors', 'doctors.id', '=', 'sponsor_doctor.doctor_id')
             ->join('users', 'users.id', '=', 'doctors.user_id')
             ->join('specialization_doctor', 'specialization_doctor.doctor_id', '=', 'doctors.id')
             ->join('specializations', 'specializations.id', '=', 'specialization_doctor.specialization_id')
-            ->select('users.name', 'users.surname', 'doctors.picture', 'specializations.name as specialization_name', 'sponsor_doctor.expire_date')
+            ->select('users.name', 'users.surname', 'doctors.id as doctor_id', 'doctors.picture', 'specializations.name as specialization_name', 'sponsor_doctor.expire_date')
             ->where('sponsor_doctor.expire_date', '>', $data_attuale)
             ->get();
 
