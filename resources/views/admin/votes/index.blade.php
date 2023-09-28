@@ -21,11 +21,6 @@
                     <h5>{{ $message->email }}</h5>
                     <hr>
                     
-                    <hr>
-                    <div class="d-flex col-2 align-items-center mt-1">
-                        <a href="{{ route('admin.messages.show', $message->id) }}" class="btn btn-sm btn-primary">Visualizza
-                            Messaggio</a>
-                    </div>
                 @endforeach
             </div>
         </div>

@@ -24,6 +24,7 @@
                                         <h4>Utente: {{ $review->name }} {{ $review->surname }}</h4>
                                         <h5 class="mb-4">E-mail: {{ $review->email }}</h5>
                                         <hr>
+                                        <h5><em>Recensione:</em></h5>
                                         <h6><strong>{{ $review->text }}</strong></h6>
                                     </div>
                                 </div>
