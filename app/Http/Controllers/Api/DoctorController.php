@@ -59,7 +59,7 @@ class DoctorController extends Controller
                 });
             })
             ->when($avrVote, function ($query) use ($avrVote) {
-                $query->where('avr_vote', $avrVote);
+                $query->where('avr_vote', '>=', $avrVote);
             })
 
             ->when($review, function ($query) use ($review) {

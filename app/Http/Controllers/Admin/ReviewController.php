@@ -22,10 +22,10 @@ class ReviewController extends Controller
     {
         // Ottieni l'oggetto dell'utente attualmente autenticato
         $user = Auth::user();
-    
+
         // Ottieni l'oggetto del medico associato all'utente autenticato
         $doctor = $user->doctor;
-    
+
         // Assicurati che il medico esista prima di cercare le recensioni
         if ($doctor) {
             // Ottieni solo le recensioni associate al medico
@@ -33,10 +33,10 @@ class ReviewController extends Controller
         } else {
             $reviews = [];
         }
-    
-        return view('admin.reviews.index', compact('user', 'reviews', 'doctor')); 
+
+        return view('admin.reviews.index', compact('user', 'reviews', 'doctor'));
     }
-    
+
 
 
     /**
@@ -59,6 +59,7 @@ class ReviewController extends Controller
     {
         //
     }
+
 
     /**
      * Display the specified resource.

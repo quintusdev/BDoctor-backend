@@ -10,37 +10,32 @@ use Illuminate\Validation\ValidationException;
 
 class ReviewController extends Controller
 {
+    // ReviewController.php
+
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'doctor_id' => 'required|integer|exists:doctors,id',
-                'name' => 'required|string',
-                'surname' => 'required|string',
-                'email' => 'required|string|email',
-                'text' => 'required|string',
-            ]);
+        // Valida i dati della richiesta
+        $validatedData = $request->validate([
+            'doctor_id' => 'required',
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required|email',
+            'text' => 'required',
+        ]);
 
-            $form_data = $request->all();
-            $doctor = Doctor::findOrFail($request->doctor_id);
+        // Crea una nuova recensione utilizzando il modello
+        $review = new Review([
+            'doctor_id' => $request->input('doctor_id'),
+            'name' => $request->input('name'),
+            'surname' => $request->input('surname'),
+            'email' => $request->input('email'),
+            'text' => $request->input('text'),
+        ]);
 
-            $review = new Review();
-            $review->fill($form_data);
-            $doctor->reviews()->save($review);
+        // Salva la recensione nel database
+        $review->save();
 
-            return response()->json([
-                'message' => 'Recensione inviata con successo',
-                'success' => true,
-            ], 201); // 201 indica la creazione riuscita
-        } catch (ValidationException $e) {
-            return response()->json([
-                'message' => 'Errore di validazione dei dati',
-                'errors' => $e->validator->getMessageBag(),
-            ], 422); // 422 indica errore di validazione
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Errore durante l\'invio della recensione',
-            ], 500); // 500 indica un errore interno del server
-        }
+        // Puoi gestire la risposta qui, ad esempio, restituendo una conferma
+        return response()->json(['message' => 'Recensione salvata con successo', 'review' => $review]);
     }
 }

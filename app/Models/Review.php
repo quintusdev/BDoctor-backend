@@ -10,7 +10,7 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'surname', 'text', 'email'];
+    protected $fillable = ['doctor_id', 'name', 'surname', 'email', 'text'];
 
     /* relazione tabella doctor */
     public function doctor(): BelongsTo
