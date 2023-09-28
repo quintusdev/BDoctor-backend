@@ -29,4 +29,4 @@ Route::get('/sponsor-doctor', [App\Http\Controllers\Api\SponsorController::class
 Route::get('/doctors/{doctor_id}', [DoctorController::class, 'show']);
 Route::post('/reviews', [App\Http\Controllers\Api\ReviewController::class, 'store']);
 Route::post('/messages', [App\Http\Controllers\Api\MessageController::class, 'store']);
-Route::post('/vote_doctor', [App\Http\Controllers\Api\VoteController::class, 'store']);
+Route::post('/vote', [App\Http\Controllers\Api\VoteController::class, 'store']);
