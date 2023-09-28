@@ -36,10 +36,12 @@ class Doctor extends Model
         return $this->belongsToMany(Sponsor::class);
     }
     /* relazione many to many alla tabella votes */
-    public function votes(): BelongsToMany
+    public function votes()
     {
-        return $this->belongsToMany(Vote::class, 'vote_doctor');
+        return $this->belongsToMany(Vote::class, 'vote_doctor', 'doctor_id', 'vote_id')
+            ->withPivot('name', 'surname', 'email'); // Specifica i campi aggiuntivi nella tabella pivot
     }
+
     public function getPicturePathAttribute()
     {
         return 'images/' . $this->attributes['picture'];

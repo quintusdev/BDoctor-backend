@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Doctor;
+use App\Models\Vote;
 use Illuminate\Validation\ValidationException;
+use App\Models\vote_doctor;
 
 class ReviewController extends Controller
 {
@@ -35,7 +37,20 @@ class ReviewController extends Controller
         // Salva la recensione nel database
         $review->save();
 
+        $doctor = Doctor::find($request->doctor_id);
+
+        // Ottieni l'ID del voto dalla richiesta
+        $vote_id = $request->input('vote_id');
+
+        // Aggiungi il voto associato al dottore nella tabella pivot
+        $doctor->votes()->attach($vote_id, [
+            'name' => $request->input('name'),
+            'surname' => $request->input('surname'),
+            'email' => $request->input('email'),
+        ]);
+
         // Puoi gestire la risposta qui, ad esempio, restituendo una conferma
-        return response()->json(['message' => 'Recensione salvata con successo', 'review' => $review]);
-    }
+        return response()->json(['message' => 'Recensione e voto salvati con successo', 'review' => $review]);
+
+        }
 }
