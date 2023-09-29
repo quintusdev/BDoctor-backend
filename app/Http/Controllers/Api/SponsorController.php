@@ -20,8 +20,12 @@ class SponsorController extends Controller
             ->join('users', 'users.id', '=', 'doctors.user_id')
             ->join('specialization_doctor', 'specialization_doctor.doctor_id', '=', 'doctors.id')
             ->join('specializations', 'specializations.id', '=', 'specialization_doctor.specialization_id')
-            ->select('users.name', 'users.surname', 'doctors.id as doctor_id', 'doctors.picture', 'specializations.name as specialization_name', 'sponsor_doctor.expire_date')
+            ->select('users.name', 'users.surname', 'doctors.id as doctor_id', 'doctors.picture')
+            ->distinct()
+            ->addSelect(DB::raw('GROUP_CONCAT(specializations.name) as specialization_names'))
+            ->addSelect('sponsor_doctor.expire_date')
             ->where('sponsor_doctor.expire_date', '>', $data_attuale)
+            ->groupBy('doctors.id', 'users.name', 'users.surname', 'doctors.picture', 'sponsor_doctor.expire_date')
             ->get();
 
         return response()->json($sponsorDoctorData);
