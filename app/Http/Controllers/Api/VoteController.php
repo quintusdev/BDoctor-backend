@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use App\Models\Vote;
 use App\Models\Doctor;
@@ -40,4 +41,6 @@ class VoteController extends Controller
         // Restituisci una risposta di successo
         return response()->json(['message' => 'Voto inserito con successo'], 201);
     }
+
+    
 }
