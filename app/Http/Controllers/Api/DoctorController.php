@@ -96,16 +96,17 @@ class DoctorController extends Controller
         ]);
     }
 
-    public function getDoctorsWithAverageVotes()
+    public function getAverageVote($doctor_id)
     {
-        $doctors = Doctor::with('votes')->get();
+        // Esegui una query per calcolare la media dei voti di un medico
+        $averageVote = DB::table('vote_doctor')
+            ->where('doctor_id', $doctor_id)
+            ->avg('vote_id');
 
-        // Calcola la media dei voti per ciascun dottore
-        $doctors->each(function ($doctor) {
-            $averageVote = $doctor->votes->avg('vote');
-            $doctor->average_vote = $averageVote;
-        });
-
-        return response()->json(['doctors' => $doctors]);
+        return response()->json([
+            'success' => true,
+            'average_vote' => $averageVote,
+        ]);
     }
+
 }

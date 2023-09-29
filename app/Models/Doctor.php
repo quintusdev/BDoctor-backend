@@ -47,4 +47,12 @@ class Doctor extends Model
         return 'images/' . $this->attributes['picture'];
     }
 
+    public function averageVote()
+    {
+        return $this->belongsToMany(Vote::class, 'vote_doctor', 'doctor_id', 'vote_id')
+            ->selectRaw('AVG(votes.value) as average_vote')
+            ->first()
+            ->average_vote;
+    }
+
 }
