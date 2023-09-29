@@ -41,6 +41,4 @@ class VoteController extends Controller
         // Restituisci una risposta di successo
         return response()->json(['message' => 'Voto inserito con successo'], 201);
     }
-
-    
 }

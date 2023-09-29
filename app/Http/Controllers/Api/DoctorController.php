@@ -44,7 +44,7 @@ class DoctorController extends Controller
         // Ottieni i parametri di ricerca dal modulo
         $name = $request->input('name');
         $specialization = $request->input('specialization');
-        $avrVote = $request->input('avr_vote');
+        $avrVote = $request->input('average_vote');
         $review = $request->input('reviews');
 
         // Esegui la ricerca utilizzando i parametri
@@ -60,7 +60,7 @@ class DoctorController extends Controller
                 });
             })
             ->when($avrVote, function ($query) use ($avrVote) {
-                $query->where('avr_vote', '>=', $avrVote);
+                $query->where('average_vote', '>=', $avrVote);
             })
 
             ->when($review, function ($query) use ($review) {
@@ -103,10 +103,12 @@ class DoctorController extends Controller
             ->where('doctor_id', $doctor_id)
             ->avg('vote_id');
 
+        // Converti la media dei voti in un numero intero
+        $averageVote = intval($averageVote);
+
         return response()->json([
             'success' => true,
             'average_vote' => $averageVote,
         ]);
     }
-
 }
