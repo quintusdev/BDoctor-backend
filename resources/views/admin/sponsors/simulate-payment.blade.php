@@ -28,7 +28,7 @@
                                 <input class="form-control" type="tel" id="phone_number" name="phone_number">
                             </div>
                         </div>
-                        <h4 class="mt-4">Indirizzo di consegna</h4>
+                        <h4 class="mt-4">Indirizzo di fatturazione</h4>
                         <hr>
                         <div class="row">
                             <div class="form-group col-6">
