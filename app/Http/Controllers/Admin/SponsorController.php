@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Sponsor;
 use App\Models\Doctor;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSponsorRequest;
@@ -20,25 +21,25 @@ class SponsorController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     private function getProductDetails($selectedSponsorId)
-     {
-         $selectedSponsor = Sponsor::find($selectedSponsorId);
-     
-         if (!$selectedSponsor) {
-             // Gestisci l'ID non trovato
-         }
-     
-         $product_name = $selectedSponsor->name;
-         $product_price = $selectedSponsor->price;
-     
-         return [
-             'product_name' => $product_name,
-             'product_price' => $product_price,
-         ];
-     }
+    private function getProductDetails($selectedSponsorId)
+    {
+        $selectedSponsor = Sponsor::find($selectedSponsorId);
+
+        if (!$selectedSponsor) {
+            // Gestisci l'ID non trovato
+        }
+
+        $product_name = $selectedSponsor->name;
+        $product_price = $selectedSponsor->price;
+
+        return [
+            'product_name' => $product_name,
+            'product_price' => $product_price,
+        ];
+    }
 
     public function simulatePayment(StoreSponsorRequest $request)
-    {   
+    {
         // Inizializza la tua configurazione di Braintree
         $gateway = new Gateway([
             'environment' => config('services.braintree.environment'),
@@ -62,7 +63,7 @@ class SponsorController extends Controller
     }
 
     public function handleSimulatedPayment(StoreSponsorRequest $request)
-    {   
+    {
         $gateway = new Gateway([
             'environment' => config('services.braintree.environment'),
             'merchantId' => config('services.braintree.merchant_id'),
@@ -85,7 +86,7 @@ class SponsorController extends Controller
 
         // Effettua la simulazione della transazione
         $result = $gateway->transaction()->sale([
-            'amount' =>$selectedSponsor->price,
+            'amount' => $selectedSponsor->price,
             'paymentMethodNonce' => $paymentData['payment_method_nonce'],
             'options' => [
                 'submitForSettlement' => true, // Completa la simulazione come una transazione reale
@@ -103,7 +104,7 @@ class SponsorController extends Controller
             $expireDate = now()->addHours($durationInHours);
 
             // Eseguo una query diretta per inserire i dati nella tabella ponte
-            \DB::table('sponsor_doctor')->insert([
+            DB::table('sponsor_doctor')->insert([
                 'sponsor_id' => $sponsorId,
                 'doctor_id' => $doctorId,
                 'expire_date' => $expireDate,
@@ -118,7 +119,7 @@ class SponsorController extends Controller
             //codice per genereare clientToken
             $clientToken = $gateway->clientToken()->generate();
             $errors = ["pagamento rifiutato"];
-            return view('admin.sponsors.simulate-payment', compact('clientToken', 'selectedSponsorId', 'product_name', 'product_price'))->withErrors(['payment'=>'pagamento rifiutato']);
+            return view('admin.sponsors.simulate-payment', compact('clientToken', 'selectedSponsorId', 'product_name', 'product_price'))->withErrors(['payment' => 'pagamento rifiutato']);
         }
     }
 

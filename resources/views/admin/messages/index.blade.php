@@ -14,21 +14,26 @@
                         <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Torna alla Dashboard</a>
                     </div>
                 </div>
-                <div class="row me-5">
-                    @foreach ($messages as $message)
-                        <div class="col-12 col-md-4">
-                            <div class="card mt-4">
-                                <div class="card-body">
-                                    <div class="card-content text-center">
-                                        <h4>{{ $message->name }} {{ $message->surname }}</h4>
-                                        <h5 class="mb-4">{{ $message->email }}</h5>
-                                        <a href="{{ route('admin.messages.show', $message->id) }}"
-                                            class="btn btn-sm btn-primary">Visualizza Messaggio</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+                {{-- TABELLA VISUALIZZAZIONE MESSAGGI --}}
+                <div class="table-responsive">
+                    <table class="table table-striped rounded-table mt-5">
+                        <thead>
+                            <tr class="table-primary">
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Messaggio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($messages as $message)
+                                <tr>
+                                    <td>{{ $message->name }} {{ $message->surname }}</td>
+                                    <td>{{ $message->email }}</td>
+                                    <td>{{ $message->text }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

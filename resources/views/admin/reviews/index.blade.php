@@ -15,22 +15,26 @@
                     </div>
                 </div>
                 {{-- VISUALIZZAZIONE REVIEWS ASSOCIATE AL PROFESSIONISTA --}}
-                <div class="row me-5">
-                    @foreach ($reviews as $review)
-                        <div class="col-12 col-md-4">
-                            <div class="card mt-4">
-                                <div class="card-body">
-                                    <div class="card-content text-center">
-                                        <h4>Utente: {{ $review->name }} {{ $review->surname }}</h4>
-                                        <h5 class="mb-4">E-mail: {{ $review->email }}</h5>
-                                        <hr>
-                                        <h5><em>Recensione:</em></h5>
-                                        <h6><strong>{{ $review->text }}</strong></h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+                {{-- TABELLA VISUALIZZAZIONE REVIEWS --}}
+                <div class="table-responsive">
+                    <table class="table table-striped rounded-table mt-5">
+                        <thead>
+                            <tr>
+                                <th>Utente</th>
+                                <th>E-mail</th>
+                                <th>Recensione</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($reviews as $review)
+                                <tr>
+                                    <td>{{ $review->name }} {{ $review->surname }}</td>
+                                    <td>{{ $review->email }}</td>
+                                    <td>{{ $review->text }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
