@@ -35,7 +35,7 @@ class Doctor extends Model
     {
         return $this->belongsToMany(Sponsor::class);
     }
-    /* relazione many to many alla tabella votes */
+
     public function votes()
     {
         return $this->belongsToMany(Vote::class, 'vote_doctor', 'doctor_id', 'vote_id')
@@ -49,10 +49,25 @@ class Doctor extends Model
 
     public function averageVote()
     {
-        return $this->belongsToMany(Vote::class, 'vote_doctor', 'doctor_id', 'vote_id')
-            ->selectRaw('AVG(votes.value) as average_vote')
-            ->first()
-            ->average_vote;
+        // Usa la relazione votes per ottenere tutti i voti del dottore
+        $votes = $this->votes;
+
+        if ($votes->isEmpty()) {
+            return 0; // Gestisci il caso in cui il dottore non abbia ricevuto voti
+        }
+
+        // Calcola la media dei voti
+        $totalVotes = $votes->sum('value');
+        $averageVote = $totalVotes / $votes->count();
+
+        return $averageVote;
     }
 
+    public function calculateAverageVote()
+    {
+        // Calcola la media dei voti utilizzando la relazione votes
+        $averageVote = $this->votes()->avg('value');
+
+        return $averageVote ?: 0; // Restituisci 0 se non ci sono voti
+    }
 }

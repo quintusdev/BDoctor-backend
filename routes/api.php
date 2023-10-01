@@ -30,5 +30,5 @@ Route::get('/doctors/{doctor_id}', [DoctorController::class, 'show']);
 Route::post('/reviews', [App\Http\Controllers\Api\ReviewController::class, 'store']);
 Route::post('/messages', [App\Http\Controllers\Api\MessageController::class, 'store']);
 Route::post('/vote', [App\Http\Controllers\Api\VoteController::class, 'store']);
-Route::get('/doctor/{doctor_id}/average-vote', [DoctorController::class, 'getAverageVote']);
-
+Route::get('/doctor/{doctor_id}/average-vote', [App\Http\Controllers\Api\DoctorController::class, 'getAverageVote']);
+Route::get('/doctors/filter-by-vote', [App\Http\Controllers\Api\DoctorController::class, 'filterByVote']);

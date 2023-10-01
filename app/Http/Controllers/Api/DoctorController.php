@@ -98,17 +98,36 @@ class DoctorController extends Controller
 
     public function getAverageVote($doctor_id)
     {
-        // Esegui una query per calcolare la media dei voti di un medico
-        $averageVote = DB::table('vote_doctor')
-            ->where('doctor_id', $doctor_id)
-            ->avg('vote_id');
+        // Trova il dottore
+        $doctor = Doctor::find($doctor_id);
 
-        // Converti la media dei voti in un numero intero
-        $averageVote = intval($averageVote);
+        if (!$doctor) {
+            return response()->json(['error' => 'Dottore non trovato'], 404);
+        }
+
+        // Calcola la media dei voti utilizzando il metodo nel modello Doctor
+        $averageVote = $doctor->calculateAverageVote();
 
         return response()->json([
             'success' => true,
             'average_vote' => $averageVote,
+        ]);
+    }
+
+    public function filterByVote(Request $request)
+    {
+        // Ottieni il valore del filtro average_vote dalla richiesta
+        $averageVoteFilter = $request->input('average_vote');
+
+        // Esegui una query per ottenere i medici con una media dei voti maggiore o uguale a $averageVoteFilter
+        $doctors = Doctor::with('user', 'specializations', 'votes', 'reviews')
+            ->where('average_vote', '>=', $averageVoteFilter)
+            ->get();
+
+        // Restituisci i risultati della query come JSON
+        return response()->json([
+            'success' => true,
+            'results' => $doctors,
         ]);
     }
 }
