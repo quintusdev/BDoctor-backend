@@ -62,12 +62,4 @@ class Doctor extends Model
 
         return $averageVote;
     }
-
-    public function calculateAverageVote()
-    {
-        // Calcola la media dei voti utilizzando la relazione votes
-        $averageVote = $this->votes()->avg('value');
-
-        return $averageVote ?: 0; // Restituisci 0 se non ci sono voti
-    }
 }
