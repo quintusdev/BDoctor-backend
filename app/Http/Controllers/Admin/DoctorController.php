@@ -148,7 +148,9 @@ class DoctorController extends Controller
      */
     public function update(UpdateDoctorRequest $request, Doctor $doctor)
     {
-        // ...
+        // Inizializzazione $form_data con i dati validati dal request
+        $form_data = $request->validated();
+        
         // Se è stata inviata una nuova immagine tramite il modulo
         if ($request->hasFile('picture')) {
             // Se il dottore ha già una foto associata, elimina la vecchia foto dallo storage

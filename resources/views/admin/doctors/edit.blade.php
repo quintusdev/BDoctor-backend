@@ -5,10 +5,10 @@
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between">
-                    <div class="col-6 mt-4 mx-2">
-                        <h1>Modifica il tuo profilo</h1>
+                    <div class="col-12 col-md-6 mt-4 mx-2 text-secondary">
+                        <h2>Modifica il tuo profilo</h2>
                     </div>
-                    <div class="col-6 mt-5 mx-2">
+                    <div class="col-12 col-md-6 mt-5 mx-2">
                         <a href="{{ route('admin.doctors.index') }}" class="btn btn-sm btn-primary">Torna alla Dashboard</a>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                         @csrf
                         @method('PUT')
                         {{-- MODIFICA CAMPO NOME --}}
-                        <div class="form-group col-3 mt-4">
+                        <div class="form-group col-12 col-md-6 mt-4">
                             <h5><strong>Nome:</strong></h5>
                             <input class="form-control @error('name')is-invalid @enderror" type="text" name="name"
                                 id="name" placeholder="Nome" value="{{ old('name') ?? $user->name }}" required>
@@ -31,7 +31,7 @@
                         </div>
 
                         {{-- MODIFICA CAMPO COGNOME --}}
-                        <div class="form-group col-3 mt-4">
+                        <div class="form-group col-12 col-md-6 mt-4">
                             <h5><strong>Cognome:</strong></h5>
                             <input class="form-control @error('surname')is-invalid @enderror" type="text" name="surname"
                                 id="surname" placeholder="Cognome" value="{{ old('surname') ?? $user->surname }}" required>
@@ -40,7 +40,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group col-3 mt-4">
+                        <div class="form-group col-12 col-md-6 mt-4">
                             <label for="phone"><strong>Modifica Numero di Telefono:</strong></label>
                             <input class="form-control @error('phone') is-invalid @enderror" type="tel" name="phone" id="phone" placeholder="Numero di Telefono" value="{{ old('phone') ?? $doctor->phone }}">
                             @error('phone')
@@ -49,13 +49,13 @@
                         </div>
 
                         {{-- MODIFICA IMMAGINE DI PROFILO --}}
-                        <div class="form-group col-6 mt-4">
+                        <div class="form-group col-12 col-md-6 mt-4">
                             <div>
                                 <h5><strong>Inserisci o aggiorna la tua immagine profilo:</strong></h5>
                                 @if(isset($doctor->picture))
-                                    <img src="{{ asset('storage/' . $doctor->picture) }}" class="img_profile">
+                                    <img src="{{ asset('storage/' . $doctor->picture) }}" class="img_profile img-fluid" >
                                 @else
-                                    <img src="{{ asset('storage/profile_default.jpg') }}" alt="immagine di default" class="img_profile">
+                                    <img src="{{ asset('storage/profile_default.jpg') }}" alt="immagine di default" class="img_profile img-fluid">
                                 @endif
                             </div>
                             <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture"
@@ -63,8 +63,8 @@
                         </div>
 
                         {{-- MODIFICA SPECIALIZZAZIONI --}}
-                        <div class="form-group mt-4">
-                            <div class="mt-2">
+                        <div class="form-group col-12 col-md-6 mt-4">
+                            <div class="mt-2 mb-4">
                                 <h4><strong>Seleziona le tue Specializzazioni:</strong></h4>
                                 @foreach ($specializations as $specialization)
                                     <div class="form-check form-switch">
@@ -83,14 +83,16 @@
 
                             {{-- CARICAMENTO FILE CV --}}
                             <div>
-                                <h5><strong>Inserisci il tuo curriculum:</strong></h5>
+                                <h4><strong>Inserisci il tuo curriculum:</strong></h4>
                             </div>
                             @if(isset($doctor->cv))
-                                <iframe src="{{ asset('storage/' . $doctor->cv) }}" width="50%" height="600"></iframe>
+                                <div class="container-fluid">
+                                    <iframe src="{{ asset('storage/' . $doctor->cv) }}" width="100%" height="400px"></iframe>
+                                </div>
                             @else
                                 {{-- <img src="{{ asset('storage/') }}" alt="immagine di default"> --}}
                             @endif
-                            <div class="form-group col-3 mt-4">
+                            <div class="form-group col-12 col-md-6 mt-4">
                                 <input type="file" class="form-control @error('cv') is-invalid @enderror" name="cv"
                                     id="cv">
                             </div>
@@ -112,7 +114,7 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror --}}
                         {{-- PULSANTE DI SALVATAGGIO DELLE MODIFICHE --}}
-                        <div class="form-group mt-4">
+                        <div class="form-group mt-4 mb-5">
                             <button class="btn btn-sm btn-success" type="submit">Salva</button>
                         </div>
                     </form>
