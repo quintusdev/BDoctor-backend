@@ -108,6 +108,9 @@ class DoctorController extends Controller
         // Calcola la media dei voti utilizzando il metodo nel modello Doctor
         $averageVote = $doctor->averageVote();
 
+        // Arrotonda la media dei voti per difetto
+        $averageVote = floor($averageVote);
+
         return response()->json([
             'success' => true,
             'average_vote' => $averageVote,
