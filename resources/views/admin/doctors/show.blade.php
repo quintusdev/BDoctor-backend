@@ -6,8 +6,8 @@
             <div class="col-12">
                 <div class="col-12 mt-4 d-flex justify-content-between">
                     {{-- NOME UTENTE --}}
-                    <div class="d-flex col-10 align-items-center mt-1">
-                        <h1>Benvenuto {{ $user->name }} {{ $user->surname }}</h1>
+                    <div class="d-flex col-10 text-secondary align-items-center mt-1 mb-4">
+                        <h2>Benvenuto {{ $user->name }} {{ $user->surname }}</h2>
                     </div>
                     {{-- BUTTON CHE RIPORTA ALLA DASHBOARD --}}
                     <div class="d-flex col-2 align-items-center mt-1">

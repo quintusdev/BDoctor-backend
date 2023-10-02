@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container">
-        <h2 class="fs-4 text-secondary my-4">
-            {{ __('Dashboard BDoctor di ') }}{{ $user->name }} {{ $user->surname }}
-        </h2>
+        <div class="fs-4 text-secondary my-4">
+            <h2>{{ __('Dashboard BDoctor di ') }}{{ $user->name }} {{ $user->surname }}</h2>
+        </div>
         <div class="row d-flex flex-row">
             
                         {{-- SEZIONE SCHEDE --}}

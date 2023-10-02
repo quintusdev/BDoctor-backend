@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="col-12 mt-4 d-flex justify-content-between">
                     {{-- NOME UTENTE --}}
-                    <div class="d-flex col-10 align-items-center mt-1">
-                        <h1>Sezione Messaggi Ricevuti</h1>
+                    <div class="d-flex col-10 align-items-center mt-1 text-secondary">
+                        <h2>Sezione Messaggi Ricevuti</h2>
                     </div>
                     {{-- BUTTON CHE RIPORTA ALLA DASHBOARD --}}
                     <div class="d-flex col-2 align-items-center mt-1">
