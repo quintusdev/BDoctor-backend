@@ -6,8 +6,8 @@
             <div class="col-12">
                 <div class="col-12 mt-4 d-flex justify-content-between">
                     {{-- NOME UTENTE --}}
-                    <div class="d-flex col-10 align-items-center mt-1">
-                        <h1>Sezione Recensioni Ricevute</h1>
+                    <div class="d-flex col-10 align-items-center mt-1 text-secondary">
+                        <h2>Sezione Recensioni Ricevute</h2>
                     </div>
                     {{-- BUTTON CHE RIPORTA ALLA DASHBOARD --}}
                     <div class="d-flex col-2 align-items-center mt-1">
